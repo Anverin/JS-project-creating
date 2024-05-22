@@ -1,0 +1,30 @@
+
+
+
+/*.navigation-buttons {*/
+/*    margin-top: 60px;*/
+/*    margin-bottom: 80px;*/
+/*}*/
+/*.navigation-buttons .btn {*/
+/*    width: 100px;*/
+/*    font-size: 16px;*/
+
+/*}*/
+
+.nav-pills li a {
+    width: 100px;
+    text-align: center;
+}
+
+.charts img {
+    max-width: 437px;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;;
+    margin-bottom: 80px;;
+}
+
+.chart-title {
+    color: #052C65;
+    text-align: center;
+}

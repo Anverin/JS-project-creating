@@ -12,3 +12,42 @@ body {
     src: url("../fonts/Roboto-Medium.ttf");
     font-family: "Roboto Medium";
 }
+
+.container {
+    margin: 0;
+    padding: 0;
+
+}
+
+.flex-column a img {
+    max-width: 98px;
+    margin-top: 10px;
+}
+
+.flex-column ul li a {
+    color: #052C65;
+    width: 178px;
+    text-align: left;
+}
+
+.flex-column ul li button {
+    color: #052C65;
+    width: 178px;
+}
+
+.balance {
+    color: #052C65;
+}
+
+.user-info a {
+    color: #052C65;
+}
+
+li  {
+    color: #052C65;
+}
+
+.h2 {
+    color: #052C65;
+    margin-top: 80px;
+}

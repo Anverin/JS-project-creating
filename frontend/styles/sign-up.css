@@ -1,0 +1,8 @@
+.container {
+    margin-top: 281px;
+}
+
+.container .logo img {
+    max-width: 171px;
+    margin-bottom: 60px;
+}
