@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class=" d-flex container ">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 219px; font-size: small">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 219px; font-size: small;">
         <a class="text-center" href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none " >
 
             <img src="images/logo.png" alt="Лого">
@@ -17,6 +17,10 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto rounded">
+
+
+
+
             <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link active" style="font-size: small" aria-current="page">
                     <svg id="main-svg-white" class="me-2" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,13 +56,15 @@
                 </a>
             </li>
 
-            <li class="nav-item mb-1 ">
-                <button class="nav-link active btn btn-toggle d-inline-flex justify-content-between align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true" style="font-size: small">
+
+
+            <li class="nav-item mb-1 " id="categories-list">
+                <button  class="nav-link active btn btn-toggle d-inline-flex justify-content-between align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true" style="font-size: small">
                     Категории <svg id="categories-svg-dark" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.145063 13.3539C0.051021 13.2601 -0.00183105 13.1327 -0.00183105 12.9999C-0.00183105 12.867 0.051021 12.7397 0.145063 12.6459L5.79206 6.99987L0.145063 1.35387C0.0185907 1.2274 -0.0308022 1.04306 0.0154897 0.8703C0.0617817 0.697536 0.196726 0.562593 0.36949 0.5163C0.542254 0.470008 0.726591 0.519401 0.853063 0.645873L6.85306 6.64587C6.9471 6.73968 6.99996 6.86705 6.99996 6.99987C6.99996 7.1327 6.9471 7.26007 6.85306 7.35387L0.853063 13.3539C0.759259 13.4479 0.63189 13.5008 0.499063 13.5008C0.366235 13.5008 0.238867 13.4479 0.145063 13.3539Z" fill="#052C65"/>
                 </svg>
                 </button>
-                <div class="collapse show" id="account-collapse" style="">
+                <div class="collapse show " id="account-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="javascript:void(0)" class="d-inline-flex text-decoration-none rounded btn text-primary" style="font-size: small">Доходы</a></li>
                         <li><a href="javascript:void(0)" class="d-inline-flex text-decoration-none rounded btn text-primary" style="font-size: small">Расходы</a></li>
@@ -66,9 +72,23 @@
                 </div>
             </li>
 
+            <li class="nav-item mb-1 ">
+                <button id="categories" class="nav-link  btn btn-toggle d-inline-flex justify-content-between align-items-center rounded-bottom-0 border-0" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true" style="font-size: small">
+                    Категории <svg id="categories-svg-dark" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.145063 13.3539C0.051021 13.2601 -0.00183105 13.1327 -0.00183105 12.9999C-0.00183105 12.867 0.051021 12.7397 0.145063 12.6459L5.79206 6.99987L0.145063 1.35387C0.0185907 1.2274 -0.0308022 1.04306 0.0154897 0.8703C0.0617817 0.697536 0.196726 0.562593 0.36949 0.5163C0.542254 0.470008 0.726591 0.519401 0.853063 0.645873L6.85306 6.64587C6.9471 6.73968 6.99996 6.86705 6.99996 6.99987C6.99996 7.1327 6.9471 7.26007 6.85306 7.35387L0.853063 13.3539C0.759259 13.4479 0.63189 13.5008 0.499063 13.5008C0.366235 13.5008 0.238867 13.4479 0.145063 13.3539Z" fill="#052C65"/>
+                </svg>
+                </button>
+                <div class="collapse show" id="account-collapse" style="">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="javascript:void(0)" class="nav-link bg-warning d-inline-flex text-decoration-none rounded-0 btn text-primary" style="font-size: small">Доходы</a></li>
+                        <li><a href="javascript:void(0)" class="nav-link bg-danger d-inline-flex text-decoration-none rounded-top-0 btn text-primary" style="font-size: small">Расходы</a></li>
+                    </ul>
+                </div>
+            </li>
 
 
-            <li class="mb-1 bg-primary border border-primary rounded ">
+
+            <li class="mb-1 bg-primary border border-primary rounded "  >
                 <button class="btn btn-toggle d-inline-flex justify-content-between align-items-center border-0 text-white" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true" style="font-size: small">
                     Категории
                     <svg id="categories-svg-white" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,86 +124,48 @@
         <h1 class="h2 ms-5 mb-5 fw-bold">Доходы</h1>
 
 
-<!--        <div class="income-types d-flex ms-5">-->
-
-<!--        <div class="card py-1 me-3" style="width: 352px;">-->
-<!--            <div class="card-body">-->
-<!--                <h4 class="card-title fw-bold" style="color:#052C65">Депозиты</h4>-->
-<!--                <a href="#" class=" btn btn-primary me-2">Редактировать</a>-->
-<!--                <a href="#" class=" btn btn-danger">Удалить</a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card py-1 me-3" style="width: 352px;">-->
-<!--            <div class="card-body">-->
-<!--                <h4 class="card-title fw-bold" style="color:#052C65">Зарплата</h4>-->
-<!--                <a href="#" class=" btn btn-primary me-2">Редактировать</a>-->
-<!--                <a href="#" class=" btn btn-danger">Удалить</a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card py-1 me-3" style="width: 352px;">-->
-<!--            <div class="card-body">-->
-<!--                <h4 class="card-title fw-bold" style="color:#052C65">Сбережения</h4>-->
-<!--                <a href="#" class=" btn btn-primary me-2">Редактировать</a>-->
-<!--                <a href="#" class=" btn btn-danger">Удалить</a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card py-1 me-3" style="width: 352px;">-->
-<!--            <div class="card-body">-->
-<!--                <h4 class="card-title fw-bold" style="color:#052C65">Инвестиции</h4>-->
-<!--                <a href="#" class=" btn btn-primary me-2">Редактировать</a>-->
-<!--                <a href="#" class=" btn btn-danger">Удалить</a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card py-1 me-3" style="width: 352px;">-->
-<!--            <div class="card-body">-->
-<!--                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                    <path d="M14.5469 6.08984V9.05664H0.902344V6.08984H14.5469ZM9.32422 0.511719V15.0039H6.13867V0.511719H9.32422Z" fill="#CED4DA"/>-->
-<!--                </svg>-->
-
-<!--            </div>-->
-<!--        </div>-->
-
-
-<div class="cards row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 ms-5">  <!--    на адаптиве убрать row, будет одна колонка-->
+<!--    <div class="  cards row  row-cols-sm-1  row-cols-lg-3  g-3 ms-5">  &lt;!&ndash;    на адаптиве убрать row, будет одна колонка&ndash;&gt;-->
+    <div class="  cards row row-cols-sm-1 row-cols-md-2 row-cols-lg-3    g-3 ms-5">  <!--    на адаптиве убрать row, будет одна колонка-->
+<!--   <div class="card-item col-lg-4 col-md-6 col-sm-12">-->
     <div class="card-item ">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title fw-bold" style="color:#052C65">Депозиты</h4>
                 <a href="#" class=" btn btn-primary me-2 mb-2">Редактировать</a>
-                <a href="#" class=" btn btn-danger mb-2">Удалить</a>
+                <a href="#" class=" btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete-category">Удалить</a>
         </div>
     </div>
-    </div> <div class="card-item ">
+    </div>
+    <div class="card-item ">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title fw-bold" style="color:#052C65">Зарплата</h4>
                 <a href="#" class="btn btn-primary me-2 mb-2">Редактировать</a>
-                <a href="#" class="btn btn-danger mb-2">Удалить</a>
+                <a href="#" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete-category">Удалить</a>
         </div>
     </div>
-    </div> <div class="card-item ">
+    </div>
+    <div class="card-item ">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title fw-bold" style="color:#052C65">Сбережения</h4>
                 <a href="#" class=" btn btn-primary me-2 mb-2">Редактировать</a>
-                <a href="#" class=" btn btn-danger mb-2">Удалить</a>
+                <a href="#" class=" btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete-category">Удалить</a>
         </div>
     </div>
-    </div> <div class="card-item ">
+    </div>
+    <div class="card-item">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title fw-bold" style="color:#052C65">Инвестиции</h4>
                 <a href="#" class=" btn btn-primary me-2 mb-2">Редактировать</a>
-                <a href="#" class=" btn btn-danger mb-2">Удалить</a>
+                <a href="#" class=" btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete-category">Удалить</a>
         </div>
     </div>
-    </div> <div class="card-item col-4">
+    </div>
+    <div class="card-item" >
         <div class="card">
-            <div class="card-body text-center py-5">
+            <div class="card-body text-center py-5 ">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.5469 6.08984V9.05664H0.902344V6.08984H14.5469ZM9.32422 0.511719V15.0039H6.13867V0.511719H9.32422Z" fill="#CED4DA"/>
                 </svg>
@@ -191,15 +173,39 @@
     </div>
     </div>
 </div>
-
     </div>
 
-</div>
 
 </div>
+
+
+
+
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete-category">-->
+<!--    удаление поп-ап-->
+<!--</button>-->
+<div class="modal fade" id="delete-category" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-center">
+        <div class="modal-content py-3 fw-bold" style="color: #290661; font-size: 20px;">
+
+            <div class="modal-body mb-2">
+                Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.
+            </div>
+            <div class="modal-buttons mb-3">
+                <a class="btn btn-success me-2" >Да, удалить</a>
+                <a class="btn btn-danger" data-bs-dismiss="modal">Не удалять</a>
+            </div>
+
+
+        </div>
+    </div>
 </div>
+
+
+
 </body>
 <script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/income.js"></script>
 </html>
 
 
