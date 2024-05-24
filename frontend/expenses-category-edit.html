@@ -5,6 +5,7 @@
     <title>Редактирование категории расходов</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/common.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class=" d-flex container ">
@@ -93,8 +94,11 @@
 
         <form class="create-income-category ms-5" >
             <div class="input-group d-flex flex-column" >
-                <input type="text" class="form-control mb-4 rounded" style="width: 397px;" value="Жильё" id="new-category-name">
-                <div class="create-income-category-buttons d-flex">
+                <input type="text" class="form-control rounded" style="width: 397px;" value="Жильё" id="new-category-name">
+                <div class="invalid-feedback ms-2">
+                    Введите название категории
+                </div>
+                <div class="create-income-category-buttons mt-4 d-flex">
                     <a href="#" class="btn btn-success px-3 me-2">Сохранить</a>
                     <button class="btn btn-danger px-3">Отмена</button>
                 </div>

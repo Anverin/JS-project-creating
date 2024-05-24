@@ -1,0 +1,102 @@
+.nav-pills li a {
+    width: 100px;
+    text-align: center;
+}
+
+.charts img {
+    /*max-width: 437px;*/
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;;
+    margin-bottom: 80px;;
+}
+
+.chart-title {
+    color: #052C65;
+    text-align: center;
+}
+
+
+.normal-sidebar {
+    display: flex;
+}
+
+
+/* Меню бокового бара */
+.adaptive-sidebar {
+    position: fixed; /* Оставаться на месте */
+    z-index: 3; /* Оставайтесь на вершине */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* Отключить горизонтальную прокрутку */
+    padding-top: 85px; /* Поместите содержимое 60px сверху */
+    transition: 0.5s; /* 0.5 секунд эффект перехода для скольжения в боковой панели */
+    }
+
+/* На боковой панели */
+.sidebar a {
+    text-decoration: none;
+}
+
+/* При наведении курсора мыши на навигационные ссылки измените их цвет */
+.sidebar a:hover {
+    color: #0D6EFD;
+}
+
+/* Положение и стиль кнопки закрытия (верхний правый угол) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.adaptive-header {
+    display: none;
+}
+
+.adaptive-sidebar .nav-link {
+    width: 200px;
+}
+
+@media screen and (max-width: 992px) {
+    .charts {
+        /*background-color: #f3a2e0;*/
+        flex-direction: column;
+    }
+
+    .chart {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .adaptive-header {
+        display: flex;
+    }
+
+    .normal-sidebar {
+        display: none;
+    }
+
+    .container {
+        /*background: #d5a223;*/
+    }
+}
+
+/* На небольших экранах, где высота меньше 450px, измените стиль sidebar (меньше отступов и меньший размер шрифта) */
+@media screen and (max-width: 450px) {
+
+    .container {
+        /*background: black;*/
+    }
+
+    .charts {
+       /*background-color: #a2e7f3;*/
+    }
+
+
+
+}
+

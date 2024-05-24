@@ -5,6 +5,7 @@
     <title>Создание дохода/расхода</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/common.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -88,15 +89,27 @@
         <h1 class="h2 ms-5 mb-5 fw-bold">Создание дохода/расхода</h1>
 
 
-        <form class="income-and-expenses-creation ms-5">
+        <form class="income-and-expenses-creation ms-5"  style="width: 397px;">
             <div class="mb-3">
-                <input type="text" class="form-control mb-2" placeholder="Тип..." id="budget-type">
-                <input type="text" class="form-control mb-2" placeholder="Категория..." id="budget-category">
-                <input type="text" class="form-control mb-2" placeholder="Сумма в $..." id="budget-sum">
-                <input type="text" class="form-control mb-2" placeholder="Дата..." id="budget-date">
-                <input type="text" class="form-control mb-2" placeholder="Комментарий..." id="budget-comment">
+                <input type="text" class="form-control border" placeholder="Тип..." id="budget-type">
+                <div class="invalid-feedback ms-2">
+                    Введите тип дохода/расхода
+                </div>
+                <input type="text" class="form-control mt-2 border" placeholder="Категория..." id="budget-category">
+                <div class="invalid-feedback ms-2">
+                    Введите категорию
+                </div>
+                <input type="text" class="form-control mt-2 border" placeholder="Сумма в $..." id="budget-sum">
+                <div class="invalid-feedback ms-2">
+                    Введите сумму
+                </div>
+                <input type="text" class="form-control mt-2 border" placeholder="Дата..." id="budget-date">
+                <div class="invalid-feedback ms-2">
+                    Введите дату
+                </div>
+                <input type="text" class="form-control mt-2 border" placeholder="Комментарий..." id="budget-comment">
             </div>
-            <div class="form-buttons">
+            <div class="form-buttons mt-2">
                 <button type="submit" class="btn btn-success me-2 px-3">Создать</button>
                 <button type="submit" class="btn btn-danger px-3">Отмена</button>
             </div>

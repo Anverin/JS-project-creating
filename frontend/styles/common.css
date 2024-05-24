@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 }
 
@@ -49,4 +49,59 @@ li  {
 .h2 {
     color: #052C65;
     margin-top: 80px;
+}
+
+.adaptive-header {
+    display: none;
+}
+
+.adaptive-header a img {
+    max-width: 98px;
+    margin: 20px;
+}
+
+.normal-sidebar {
+    display: flex;
+}
+
+.adaptive-sidebar {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 85px;
+    transition: 0.5s;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #0D6EFD;
+}
+
+/* Положение и стиль кнопки закрытия (верхний правый угол) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.adaptive-sidebar .nav-link {
+    width: 200px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .adaptive-header {
+        display: flex;
+    }
+
+    .normal-sidebar {
+        display: none;
+    }
 }
