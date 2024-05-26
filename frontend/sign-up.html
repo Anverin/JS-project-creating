@@ -27,9 +27,9 @@
       fill="#6C757D"/>
 </svg>
 </span>
-                <input type="text" class="form-control" id="nameInput" placeholder="ФИО" required="">
+                <input type="text" class="form-control border" id="nameInput" placeholder="ФИО" required>
                 <div class="invalid-feedback">
-                    Введите электронную почту
+                    Введите имя
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                           d="M13.6885 4.3176L7.3885 0.1176C7.1533 -0.0392 6.8474 -0.0392 6.6122 0.1176L0.3122 4.3176C0.1169 4.4478 0 4.6662 0 4.9V12.6C0 13.3721 0.6279 14 1.4 14H12.6C13.3721 14 14 13.3721 14 12.6V4.9C14 4.6662 13.8831 4.4478 13.6885 4.3176ZM7 1.5414L12.0379 4.9L7 8.2586L1.9621 4.9L7 1.5414ZM1.4 12.6V6.2083L6.6115 9.6824C6.7291 9.7608 6.8649 9.8 7 9.8C7.1351 9.8 7.2709 9.7608 7.3885 9.6824L12.6 6.2083L12.5979 12.6H1.4Z"
                           fill="#6C757D"/>
                 </svg></span>
-                <input type="text" class="form-control" id="emailInput" placeholder="Электронная почта" required="">
+                <input type="text" class="form-control border" id="emailInput" placeholder="Электронная почта" required>
                 <div class="invalid-feedback">
                     Введите электронную почту
                 </div>
@@ -53,7 +53,7 @@
                               d="M6.4 0C4.1944 0 2.4 1.7944 2.4 4V6.4H1.6C0.7176 6.4 0 7.1176 0 8V14.4C0 15.2824 0.7176 16 1.6 16H11.2C12.0824 16 12.8 15.2824 12.8 14.4V8C12.8 7.1176 12.0824 6.4 11.2 6.4H10.4V4C10.4 1.7944 8.6056 0 6.4 0ZM11.2 8L11.2016 14.4H1.6V8H11.2ZM4 6.4V4C4 2.6768 5.0768 1.6 6.4 1.6C7.7232 1.6 8.8 2.6768 8.8 4V6.4H4Z"
                               fill="#6C757D"/>
                     </svg></span>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Пароль" required="">
+                <input type="password" class="form-control border" id="passwordInput" placeholder="Пароль" required>
                 <div class="invalid-feedback">
                     Введите пароль
                 </div>
@@ -66,15 +66,15 @@
                               d="M6.4 0C4.1944 0 2.4 1.7944 2.4 4V6.4H1.6C0.7176 6.4 0 7.1176 0 8V14.4C0 15.2824 0.7176 16 1.6 16H11.2C12.0824 16 12.8 15.2824 12.8 14.4V8C12.8 7.1176 12.0824 6.4 11.2 6.4H10.4V4C10.4 1.7944 8.6056 0 6.4 0ZM11.2 8L11.2016 14.4H1.6V8H11.2ZM4 6.4V4C4 2.6768 5.0768 1.6 6.4 1.6C7.7232 1.6 8.8 2.6768 8.8 4V6.4H4Z"
                               fill="#6C757D"/>
                     </svg></span>
-                <input type="password" class="form-control" id="repeatPasswordInput" placeholder="Подтверждение пароля"
-                       required="">
+                <input type="password" class="form-control border" id="repeatPasswordInput" placeholder="Подтверждение пароля"
+                       required>
                 <div class="invalid-feedback">
-                    Введите пароль
+                    Повторите пароль
                 </div>
             </div>
 
-            <button class="btn btn-primary w-100 py-2 mb-2" type="button">Войти</button>
-            <div class="d-flex text-body-dark"> <p>Уже есть аккаунт?</p> <a href="#" class="ms-2">Войдите в систему</a></div>
+            <button id="form-button" class="btn btn-primary w-100 py-2 mb-2" type="button" disabled>Войти</button>
+            <div class="d-flex text-body-dark"> <p>Уже есть аккаунт?</p> <a href="login.html" class="ms-2">Войдите в систему</a></div>
         </form>
 
     </div>
@@ -84,4 +84,5 @@
 </body>
 
 <script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/checkout-signup.js"></script>
 </html>

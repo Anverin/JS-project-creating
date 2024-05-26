@@ -1,9 +1,0 @@
-@media screen and (max-width: 991px) {
-    .adaptive-header {
-        display: flex;
-    }
-
-    .normal-sidebar {
-        display: none;
-    }
-}

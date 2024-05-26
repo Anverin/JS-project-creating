@@ -51,6 +51,22 @@ li  {
     margin-top: 80px;
 }
 
+.sidebar ul li a:hover {
+    background-color: #0D6EFD;
+    color: white;
+}
+
+.calendar-size li a:hover {
+    background-color: #6C757D;
+    color: white;
+}
+
+/*.btn:disabled {*/
+/*    background-color: #c1ccce;*/
+/*    border: #c1ccce;*/
+/*    cursor: not-allowed;*/
+/*}*/
+
 .adaptive-header {
     display: none;
 }
@@ -82,7 +98,6 @@ li  {
     color: #0D6EFD;
 }
 
-/* Положение и стиль кнопки закрытия (верхний правый угол) */
 .sidebar .closebtn {
     position: absolute;
     top: 15px;
@@ -91,9 +106,20 @@ li  {
     margin-left: 50px;
 }
 
+.nav-pills li a {
+    width: 100px;
+    text-align: center;
+}
+
 .adaptive-sidebar .nav-link {
     width: 200px;
 }
+
+.category-input {
+    width: 397px;
+}
+
+
 
 
 @media screen and (max-width: 768px) {
@@ -103,5 +129,37 @@ li  {
 
     .normal-sidebar {
         display: none;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .main-content .cards {
+        margin-right: 50px;
+    }
+}
+
+@media screen and (max-width: 510px) {
+
+    .h2 {
+        margin-right: 10px;
+    }
+
+    .category-input {
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+
+    .category-input {
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+
+    .category-input {
+        max-width: 250px;
+        margin-right: 20px;
     }
 }
