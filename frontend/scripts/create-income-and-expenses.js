@@ -18,7 +18,7 @@
                 name: 'sum',
                 id: 'budget-sum',
                 element: null,
-                // regex:  /^[1-9][0-9]*\$?$/,
+                regex:  /^[1-9][0-9]*\$?$/,
                 // regex:  /^[1-9][0-9]*(?:\.[0-9]+)?\$?$/,    // с дробным числом
                 valid: false,
             },

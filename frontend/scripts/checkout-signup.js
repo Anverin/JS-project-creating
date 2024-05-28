@@ -27,8 +27,9 @@
             {
                 name: 'repeatPassword',
                 id: 'repeatPasswordInput',
+                passwordId: 'passwordInput',
                 element: null,
-                regex: /(?=.*[0-9])(?=.*[A-Z])[0-9a-zA-Z]{8,}/,
+                regex: null,
                 valid: false,
             },
         ],
@@ -37,7 +38,9 @@
             const that = this;
             this.fields.forEach(item => {
                 item.element = document.getElementById(item.id);
-                item.element.onchange = function () {
+
+                             item.element.onchange = function () {
+
                     that.validateField.call(that, item, this);
                 }
             });
@@ -49,15 +52,28 @@
         },
 
         validateField(field, element) {
-            if (!element.value || !element.value.match(field.regex)) {
-                element.classList.add('border-danger');
-                element.nextElementSibling.setAttribute('style', 'display:block');
-                field.valid = false;
+            if (field.name !== 'repeatPassword') {
+                if (!element.value || !element.value.match(field.regex)) {
+                    element.classList.add('border-danger');
+                    element.nextElementSibling.setAttribute('style', 'display:block');
+                    field.valid = false;
+                } else {
+                    element.classList.remove('border-danger');
+                    element.nextElementSibling.removeAttribute('style');
+                    field.valid = true;
+                }
             } else {
-                element.classList.remove('border-danger');
-                element.nextElementSibling.removeAttribute('style');
-                field.valid = true;
+                if (element.value !== document.getElementById(element.passwordId).value) {
+                    element.classList.add('border-danger');
+                    element.nextElementSibling.setAttribute('style', 'display:block');
+                    field.valid = false;
+                } else {
+                    element.classList.remove('border-danger');
+                    element.nextElementSibling.removeAttribute('style');
+                    field.valid = true;
+                }
             }
+
             this.validateForm();
         },
 
@@ -83,40 +99,3 @@
 })();
 
 
-// document.getElementById('form-button').onclick = function () {
-//     let email = document.getElementById('emailInput');
-//     let password = document.getElementById('passwordInput');
-//
-//     if (!email.value) {
-//         email.classList.add('border-danger');
-//         email.nextElementSibling.setAttribute('style', 'display:block');
-//     } else {
-//         email.classList.remove('border-danger');
-//         email.nextElementSibling.removeAttribute('style', 'display:block');
-//     }
-// }
-
-
-
-// вставить повторение пароля в массив (выше, при загрузке страницы, его еще нет в массиве)
-// for (let i = 0; i < this.validations.length; i++) {
-//     if (this.validations[i].element === this.passwordRepeatElement) {
-//         this.validations[i].options.compareTo = this.passwordElement.value;
-//     }
-// }
-
-
-// if (element.name === 'repeatPassword' && element.value !== this.fields[2].value) {
-//     element.classList.add('border-danger');
-//     element.nextElementSibling.setAttribute('style', 'display:block');
-//     field.valid = false;
-//     console.log(111);
-
-// }
-// if (password.value !== repeatPassword.value) {
-//     alert('Пароли не совпадают');
-// }
-
-// if (this.validations[i].element === this.passwordRepeatElement) {
-//         this.validations[i].options.compareTo = this.passwordElement.value;
-//     }

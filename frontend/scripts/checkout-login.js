@@ -69,19 +69,3 @@
 CheckoutLogin.init();
 })();
 
-
-
-    // document.getElementById('form-button').onclick = function () {
-    //     let email = document.getElementById('emailInput');
-    //     let password = document.getElementById('passwordInput');
-    //
-    //     if (!email.value) {
-    //         email.classList.add('border-danger');
-    //         email.nextElementSibling.setAttribute('style', 'display:block');
-    //     } else {
-    //         email.classList.remove('border-danger');
-    //         email.nextElementSibling.removeAttribute('style', 'display:block');
-    //     }
-    // }
-
-

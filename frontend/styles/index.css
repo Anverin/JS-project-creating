@@ -12,22 +12,7 @@
 }
 
 .charts .divider {
-    display: flex;
-}
-
-
-@media screen and (max-width: 992px) {
-    .charts {
-        flex-direction: column;
-    }
-
-    .chart {
-        text-align: center;
-    }
-
-    .charts .divider {
-        display: none;
-    }
+    max-height: 450px;
 }
 
 
