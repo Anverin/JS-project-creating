@@ -166,14 +166,13 @@
         </div>
     </div>
 
-    <div class="main-content flex-fill ">
-        <h1 class="h2 ms-5 mb-5 fw-bold">Редактирование дохода/расхода</h1>
+    <div class="main-content ms-5 flex-fill ">
+        <h1 class="h2 mb-5 fw-bold">Редактирование дохода/расхода</h1>
 
-        <form class="create-income-category ms-5" >
+        <form class="create-income-category" >
             <div class="input-group d-flex flex-column" >
                 <select class="category-input form-control border rounded" id="budget-type"
                         required>
-                    <option value="" disabled hidden>Тип...</option>
                     <option value="income" selected >Доход</option>
                     <option value="expense">Расход</option>
                 </select>
@@ -183,7 +182,7 @@
                 <input type="text" class="category-input form-control mt-2 border rounded"  value="Зарплата" id="budget-category" required>
                 <div class="invalid-feedback ms-2">Введите категорию</div>
 
-                <input type="number" class="category-input form-control mt-2 border rounded"   placeholder="500$" value="500$" id="budget-sum" required>
+                <input type="text" onkeyup="value = value.replace(/[^\d]/g,'')" class="category-input form-control mt-2 border rounded"   placeholder="500$" value="500$" id="budget-sum" required>
                 <div class="invalid-feedback ms-2">Введите сумму</div>
 
                 <input type="date" class="category-input form-control mt-2 border rounded"   value="11.09.2022" id="budget-date" required>

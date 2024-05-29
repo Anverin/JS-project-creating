@@ -53,7 +53,7 @@
 
         validateField(field, element) {
             if (field.name !== 'repeatPassword') {
-                if (!element.value || !element.value.match(field.regex)) {
+                if (!element.value.match(field.regex)) {
                     element.classList.add('border-danger');
                     element.nextElementSibling.setAttribute('style', 'display:block');
                     field.valid = false;
@@ -63,7 +63,7 @@
                     field.valid = true;
                 }
             } else {
-                if (element.value !== document.getElementById(element.passwordId).value) {
+                if (element.value !== document.getElementById(field.passwordId).value) {
                     element.classList.add('border-danger');
                     element.nextElementSibling.setAttribute('style', 'display:block');
                     field.valid = false;

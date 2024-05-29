@@ -1,5 +1,6 @@
 body {
     font-family: "Roboto Regular", sans-serif;
+    height: 100vh;
 
 }
 
@@ -29,7 +30,6 @@ body {
 }
 
 .sidebar ul li a:hover {
-    /*background-color: #0D6EFD;*/
     background-color: var(--bs-primary);
     color: white;
 }
@@ -37,7 +37,7 @@ body {
 .normal-sidebar {
     width: 219px;
     font-size: small;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .sidebar ul li button {  /*кнопка выпадающего списка*/
@@ -96,10 +96,18 @@ body {
     width: 200px;
 }
 
+.main {
+    min-height: 100vh;
+}
+
+.login-form, .signup-form {
+    max-width: 397px;
+}
+
 .main-content {
     padding-top: 80px;
-    height: 100vh;
-    overflow-y: auto;
+    margin-bottom: 80px;
+    min-height: 100vh;
 }
 
 .filters button {
@@ -110,13 +118,7 @@ body {
     width: 397px;
 }
 
-.login-form, .signup-form {
-    max-width: 397px;
-    margin: 0 auto;
-}
-
-.h1, .h2, .card-body h4 {
-    /*color: #052C65;*/
+.h1, .h2, .h5, .card-body h4 {
     color: var(--bs-primary-text-emphasis);
 }
 

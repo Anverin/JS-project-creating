@@ -1,4 +1,4 @@
 plan.txt
 .idea/
-.frontend/index-test.html
-.frontend/index-test.css
+frontend/index-test.html
+frontend/styles/index-test.css

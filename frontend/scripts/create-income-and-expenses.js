@@ -47,7 +47,6 @@
 
         validateField(field, element) {
             if (!element.value || !element.value.match(field.regex)) {
-
                 element.classList.add('border-danger');
                 element.nextElementSibling.setAttribute('style', 'display:block');
                 field.valid = false;
