@@ -1,0 +1,164 @@
+body {
+    font-family: "Roboto Regular", sans-serif;
+    height: 100vh;
+
+}
+
+@font-face {
+    src: url("../fonts/Roboto-Regular.ttf");
+    font-family: "Roboto Regular";
+}
+
+.container .logo img {
+    max-width: 171px;
+    margin-bottom: 60px;
+}
+
+.sidebar a img {
+    max-width: 98px;
+    margin-top: 10px;
+}
+
+.sidebar ul li a {
+    color: var(--bs-primary-text-emphasis);
+    width: 178px;
+    text-align: left;
+}
+
+.collapse ul li a {
+    color: var(--bs-primary);
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.normal-sidebar {
+    width: 219px;
+    font-size: small;
+    min-height: 100vh;
+}
+
+.sidebar ul li button {  /*кнопка выпадающего списка*/
+    width: 178px;
+}
+
+.sidebar a {   /*крестик*/
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color:  var(--bs-primary);
+}
+
+.balance {
+    color: var(--bs-primary-text-emphasis);
+}
+
+.user-info a {
+    color: var(--bs-primary-text-emphasis);
+}
+
+.adaptive-header a img {
+    max-width: 98px;
+    margin: 20px;
+}
+
+.adaptive-header svg {
+    margin: 20px;
+}
+
+.adaptive-sidebar {
+    width: 0;
+    font-size: small;
+    height: 100vh;
+    z-index: 3;
+    overflow-x: hidden;
+    padding-top: 85px;
+    transition: 0.5s;
+}
+
+.adaptive-sidebar .closebtn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.adaptive-sidebar ul li a {
+    font-size: small;
+    width: 200px;
+}
+
+.adaptive-sidebar .nav-link {  /*кнопка выпадающего списка*/
+    width: 200px;
+}
+
+.main {
+    min-height: 100vh;
+}
+
+.login-form, .signup-form {
+    max-width: 397px;
+}
+
+.main-content {
+    padding-top: 80px;
+    margin-bottom: 80px;
+    min-height: 100vh;
+}
+
+.filters button {
+    width: 100px;
+}
+
+.input-group .category-input {
+    width: 397px;
+}
+
+.h1, .h2, .h5, .card-body h4 {
+    color: var(--bs-primary-text-emphasis);
+}
+
+.modal-content {
+    color: #290661;
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 570px) {
+    .main-content .cards {
+        margin-right: 50px;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .h2 {
+        margin-right: 10px;
+    }
+
+    .category-input {
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .category-input {
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .category-input {
+        max-width: 250px;
+        margin-right: 20px;
+    }
+}
