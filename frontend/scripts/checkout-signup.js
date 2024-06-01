@@ -38,9 +38,7 @@
             const that = this;
             this.fields.forEach(item => {
                 item.element = document.getElementById(item.id);
-
                              item.element.onchange = function () {
-
                     that.validateField.call(that, item, this);
                 }
             });
@@ -88,9 +86,15 @@
         },
 
         processForm() {
-            if (this.validateForm()) {
-                // перевод на другую страницу (Quiz2 32:00)
-                location.href = 'login.html'
+            if (this.validateForm()) { // перевод на другую страницу (Quiz2 32:00)
+                let paramString = '';
+                this.fields.forEach(item => {
+                    if (item.name === 'name') {
+                        paramString += (!paramString ? '?' : '&') + item.name + '=' + item.element.value;
+                    }
+
+                })
+                location.href = 'index.html' + paramString;
             }
         }
     };
