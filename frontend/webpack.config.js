@@ -30,7 +30,7 @@ module.exports = {
 
 
                 { from: "config", to: "config" },
-                { from: "src/services", to: "services" },
+                { from: "src/services", to: "src/services" },
             ],
         }),
     ],

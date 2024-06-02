@@ -1,8 +1,10 @@
 import {CustomHttp} from "../src/services/custom-http.js";
+import { Auth } from "../src/services/auth.js";
+import config from "../config/config.js";
 
 (function () {
     const CheckoutLogin = {
-        // rememberMeElement: null,
+        rememberMeElement: null,
         formButton: null,
         fields: [
             {
@@ -30,14 +32,7 @@ import {CustomHttp} from "../src/services/custom-http.js";
             }
         });
 
-        const rememberMeElement = document.getElementById('remember-me-checkbox');
-        // rememberMeElement.onchange = function () { // будет влиять на время жизни токенов
-        //    if (rememberMeElement.checked) {
-        //        return true;
-        //    } else {
-        //        return false;
-        //    }
-        // }
+        this.rememberMeElement = document.getElementById('remember-me-checkbox');
 
         this.formButton = document.getElementById('form-button');
         this.formButton.onclick = function () {
@@ -73,27 +68,29 @@ import {CustomHttp} from "../src/services/custom-http.js";
         async processForm() {
             if (this.validateForm()) {
                 try {
-                        const result = await CustomHttp.request('http://localhost:3000/api/signup', 'POST', {
-                            email: this.fields.find(item => item.name === 'email').element.value,
-                            password: this.fields.find(item => item.name === 'password').element.value,
-                            rememberMe: false,
-                        })
+                    const result = await CustomHttp.request(config.host + '/login', 'POST', {
+                        email: this.fields.find(item => item.name === 'email').element.value,
+                        password: this.fields.find(item => item.name === 'password').element.value,
+                        rememberMe: this.rememberMeElement.checked,
+                    });
 
-                        if (result) {
-                            if (result.error || !result.user) {
-                                throw new Error(result.message);
-                            }
+                    if (result) {
+                        if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
+                            throw new Error(result.message);
                         }
 
-                    // перевод на другую страницу
-                    location.href = '/';
+                        Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
+
+                        // перевод на другую страницу
+                        location.href = '/';
+                    }
 
                 } catch (error) {
                     console.log(error);
                 }
             }
 
-                // добавить выбранность запоминания для токенов??
+            // добавить выбранность запоминания для токенов??
         }
 
     };
@@ -103,29 +100,3 @@ CheckoutLogin.init();
 
 
 
-// async processForm() {
-//     if (this.validateForm()) {
-//         try {
-//             const response = await fetch('http://localhost:3000/api/signup',{
-//                 method: "POST",
-//                 headers: {
-//                     'Content-type': 'application/json',
-//                     'Accept': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     email: this.fields.find(item => item.name === 'email').element.value,
-//                     password: this.fields.find(item => item.name === 'password').element.value,
-//                     rememberMe: false,
-//                 })
-//             });
-//
-//             // перевод на другую страницу
-//             location.href = '/';
-//
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-//
-//     // добавить выбранность запоминания для токенов??
-// }

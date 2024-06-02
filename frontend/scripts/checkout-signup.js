@@ -1,6 +1,6 @@
-// import config from "../config/config.js";
-
 import {CustomHttp} from "../src/services/custom-http.js";
+import config from "../config/config.js";
+
 
 (function () {
     const CheckoutSignup = {
@@ -89,30 +89,28 @@ import {CustomHttp} from "../src/services/custom-http.js";
         },
 
         async processForm() {
-            // if (this.validateForm()) {
-            //     try {
-            //         const result = await CustomHttp.request('http://localhost:3000/api/signup', 'POST', {
-            //             name: this.fields.find(item => item.name === 'name').element.value.split(' ')[0],
-            //             lastName: this.fields.find(item => item.name === 'name').element.value.split(' ')[1],
-            //             email: this.fields.find(item => item.name === 'email').element.value,
-            //             password: this.fields.find(item => item.name === 'password').element.value,
-            //             passwordRepeat: this.fields.find(item => item.name === 'repeatPassword').element.value,
-            //         })
-            //
-            //         if (result) {
-            //             if (result.error || !result.user) {
-            //                 throw new Error(result.message);
-            //             }
-            //         }
-            //
-            //         // перевод на другую страницу
-            //         location.href = '/';
-            //
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            //     } else {
-            // }
+            if (this.validateForm()) {
+                try {
+                    const result = await CustomHttp.request(config.host + '/signup', 'POST', {
+                        name: this.fields.find(item => item.name === 'name').element.value.split(' ')[0],
+                        lastName: this.fields.find(item => item.name === 'name').element.value.split(' ')[1],
+                        email: this.fields.find(item => item.name === 'email').element.value,
+                        password: this.fields.find(item => item.name === 'password').element.value,
+                        passwordRepeat: this.fields.find(item => item.name === 'repeatPassword').element.value,
+                    });
+
+                    if (result) {
+                        if (result.error || !result.user.id || !result.user.email || !result.user.name || !result.user.lastName) {
+                            throw new Error(result.message);
+                        }
+                        // перевод на другую страницу
+                        location.href = '/';
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+            }
         }
     };
 
@@ -122,45 +120,3 @@ import {CustomHttp} from "../src/services/custom-http.js";
 
 
 
-// async processForm() {
-//     if (this.validateForm()) {
-//
-//
-//         try {
-//             const response = await fetch('http://localhost:3000/api/signup',{
-//                 method: "POST",
-//                 headers: {
-//                     'Content-type': 'application/json',
-//                     'Accept': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     name: this.fields.find(item => item.name === 'name').element.value.split(' ')[0],
-//                     lastName: this.fields.find(item => item.name === 'name').element.value.split(' ')[1],
-//                     email: this.fields.find(item => item.name === 'email').element.value,
-//                     password: this.fields.find(item => item.name === 'password').element.value,
-//                     passwordRepeat: this.fields.find(item => item.name === 'repeatPassword').element.value,
-//                 })
-//             });
-//
-//             if (response.status < 200 && response.status >= 300) {
-//                 throw new Error(response.message);
-//             }
-//             // в ответе в постмане нет message, нужна ли эта проверка?
-//
-//             const result = await response.json();
-//             if (result) {
-//                 if (result.error || !result.user) {
-//                     throw new Error(result.message);
-//                 }
-//             }
-//
-//             // перевод на другую страницу
-//             location.href = '/';
-//
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     } else {
-//
-//     }
-// }
