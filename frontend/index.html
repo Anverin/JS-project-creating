@@ -17,7 +17,7 @@
     <svg id="adaptive-header-burger" style="margin: 20px" width="36px" height="36px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0)" stroke="#052C65"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 18L20 18" stroke="#052C65" stroke-width="2" stroke-linecap="round"></path> <path d="M4 12L20 12" stroke="#052C65" stroke-width="2" stroke-linecap="round"></path> <path d="M4 6L20 6" stroke="#052C65" stroke-width="2" stroke-linecap="round"></path> </g></svg>
 
     <a class="text-center" href="#/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none " >
-        <img src="static/images/logo.png" alt="Лого">
+        <img src="images/logo.png" alt="Лого">
     </a>
 </div>
 
@@ -27,7 +27,7 @@
 
     <div id="normal-sidebar" class="  sidebar normal-sidebar d-md-flex d-none flex-column flex-shrink-0 p-3 border border-start-0 border-end-tertiary" >
         <a href="#/" class="text-center" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none " >
-            <img src="static/images/logo.png" alt="Лого">
+            <img src="images/logo.png" alt="Лого">
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto rounded">
@@ -87,11 +87,18 @@
         <div class="balance fw-bold ms-2">Баланс: <span class="text-primary">500$</span></div>
         <hr>
 
-        <div class="user-info ms-1">
-            <button class="d-flex align-items-center text-decoration-none border-0 bg-body" >
-                <img src="static/images/profile-img.png" alt="Profile-image" width="36" height="36" class="rounded-circle me-3 mb-2 user-name">
-                RomanChernov
+        <div class="user-info ms-1 btn-group dropup d-flex align-items-center">
+
+            <button type="button" class="border-0 bg-body dropdown-toggle-split p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/profile-img.png" alt="Profile-image" width="36" height="36" class="rounded-circle me-3 user-name">
             </button>
+            <ul class="dropdown-menu mb-1 text-center  bg-body-tertiary ">
+                <button type="button" class="border-0 bg-body-tertiary">Logout</button>
+            </ul>
+
+            <div class="user-info-name" id="user-name">
+                RomanChernov
+            </div>
         </div>
     </div>
 
@@ -157,12 +164,19 @@
         <div class="balance fw-bold ms-3">Баланс: <span class="text-primary">500$</span></div>
         <hr>
 
-        <div class="user-info ms-3 mb-4">
-            <a href="#" class="d-flex align-items-center text-decoration-none" >
-                <img src="../images/profile-img.png" alt="Profile-image" width="36" height="36" class="rounded-circle me-3 mb-2 user-name">
+        <div class="user-info ms-3 mb-4 btn-group dropup d-flex align-items-center">
+            <button type="button" class="border-0 bg-body-tertiary dropdown-toggle-split p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/profile-img.png" alt="Profile-image" width="36" height="36" class="rounded-circle me-3 user-name">
+            </button>
+            <ul class="dropdown-menu mb-1 text-center  bg-body-tertiary ">
+                <button type="button" class="border-0 bg-body-tertiary">Logout</button>
+            </ul>
+            <div class="user-info-name" id="user-info-name">
                 RomanChernov
-            </a>
+            </div>
         </div>
+
+
     </div>
 
         <div id="content"></div>
@@ -174,9 +188,8 @@
 
 </body>
 
-<script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/bootstrap.bundle.min.js"></script>
 <script src="scripts/adaptive-sidebar-move.js"></script>
-<script src="src/app.js" type="module"></script>
 </html>
 
 

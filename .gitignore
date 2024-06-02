@@ -5,4 +5,17 @@ frontend/styles/index-test.css
 openapi.yaml
 Backend for JS project.postman_collection.json
 frontend/node_modules/
-frontend/scripts/bootstrap.bundle.min.js
+frontend/scripts/checkout-login.js
+frontend/scripts/checkout-signup.js
+frontend/scripts/create-category.js
+frontend/scripts/create-income-and-expenses.js
+frontend/scripts/edit-category.js
+frontend/scripts/edit-income-and-expenses.js
+frontend/dist/
+frontend/scripts-first/
+
+
+
+backend/node_modules/
+backend/package-lock.json
+backend/.idea

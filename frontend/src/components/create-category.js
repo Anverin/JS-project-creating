@@ -50,7 +50,7 @@
 
         processForm() {
             if (this.validateForm()) {
-                location.href = 'income-and-expenses.html'
+                location.href = '#/income-and-expenses'
             }
         }
     }

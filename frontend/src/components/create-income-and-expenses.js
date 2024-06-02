@@ -69,7 +69,7 @@ export class CreateIncomeAndExpenses {
             processForm() {
                 if (this.validateForm()) {
                     // перевод на другую страницу
-                    location.href = 'income-and-expenses.html'
+                    location.href = '#/income-and-expenses'
                 }
             }
 }

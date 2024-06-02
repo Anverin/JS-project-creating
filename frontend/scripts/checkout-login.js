@@ -1,5 +1,8 @@
+import {CustomHttp} from "../src/services/custom-http.js";
+
 (function () {
     const CheckoutLogin = {
+        // rememberMeElement: null,
         formButton: null,
         fields: [
             {
@@ -13,7 +16,7 @@
                 name: 'password',
                 id: 'passwordInput',
                 element: null,
-                regex: /(?=.*[0-9])(?=.*[A-Z])[0-9a-zA-Z]{8,}/,
+                regex: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[0-9a-zA-Z]{8,}/,
                 valid: false,
             },
         ],
@@ -26,6 +29,15 @@
                 that.validateField.call(that, item, this);
             }
         });
+
+        const rememberMeElement = document.getElementById('remember-me-checkbox');
+        // rememberMeElement.onchange = function () { // будет влиять на время жизни токенов
+        //    if (rememberMeElement.checked) {
+        //        return true;
+        //    } else {
+        //        return false;
+        //    }
+        // }
 
         this.formButton = document.getElementById('form-button');
         this.formButton.onclick = function () {
@@ -58,14 +70,30 @@
         },
 
 
-        processForm() {
+        async processForm() {
             if (this.validateForm()) {
-                location.href = 'index.html'
+                try {
+                        const result = await CustomHttp.request('http://localhost:3000/api/signup', 'POST', {
+                            email: this.fields.find(item => item.name === 'email').element.value,
+                            password: this.fields.find(item => item.name === 'password').element.value,
+                            rememberMe: false,
+                        })
 
-                // здесь как-то сохранить имя из url со страницы регистрации???
-                // let paramString = '?' + this.fields[0].name + '=' + this.fields[0].element.value;
-                // location.href = 'index.html' + paramString;
+                        if (result) {
+                            if (result.error || !result.user) {
+                                throw new Error(result.message);
+                            }
+                        }
+
+                    // перевод на другую страницу
+                    location.href = '/';
+
+                } catch (error) {
+                    console.log(error);
+                }
             }
+
+                // добавить выбранность запоминания для токенов??
         }
 
     };
@@ -73,3 +101,31 @@
 CheckoutLogin.init();
 })();
 
+
+
+// async processForm() {
+//     if (this.validateForm()) {
+//         try {
+//             const response = await fetch('http://localhost:3000/api/signup',{
+//                 method: "POST",
+//                 headers: {
+//                     'Content-type': 'application/json',
+//                     'Accept': 'application/json',
+//                 },
+//                 body: JSON.stringify({
+//                     email: this.fields.find(item => item.name === 'email').element.value,
+//                     password: this.fields.find(item => item.name === 'password').element.value,
+//                     rememberMe: false,
+//                 })
+//             });
+//
+//             // перевод на другую страницу
+//             location.href = '/';
+//
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+//
+//     // добавить выбранность запоминания для токенов??
+// }

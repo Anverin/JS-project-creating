@@ -6,6 +6,6 @@ function checkUserData() {
 
     // if (!name || !email || !password)
     if (!name) {
-        location.href = 'sign-up.html';
+        location.href = '#/sign-up';
     }
 }
