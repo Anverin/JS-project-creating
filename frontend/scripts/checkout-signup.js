@@ -1,8 +1,17 @@
 import {CustomHttp} from "../src/services/custom-http.js";
 import config from "../config/config.js";
+import {Auth} from "../src/services/auth.js";
 
 
 (function () {
+
+    // не открывать страницу регистрации, если пользователь залогинен (есть токен)
+    const accessToken = localStorage.getItem(Auth.accessTokenKey);
+    if (accessToken) {
+        location.href = window.location.href.split('sign-up.html')[0] + '#/';
+        return;
+    }
+
     const CheckoutSignup = {
         formButton: null,
         fields: [
@@ -103,8 +112,10 @@ import config from "../config/config.js";
                         if (result.error || !result.user.id || !result.user.email || !result.user.name || !result.user.lastName) {
                             throw new Error(result.message);
                         }
+
+
                         // перевод на другую страницу
-                        location.href = '/';
+                        location.href = 'login.html';
                     }
                 } catch (error) {
                     console.log(error);

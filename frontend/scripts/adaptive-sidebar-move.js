@@ -1,7 +1,14 @@
-document.getElementById('adaptive-header-burger').onclick = function openAdaptiveSidebar() {
-    document.getElementById("adaptive-sidebar").style.width = "250px";
-}
+(function () {
+    const adaptiveHeaderBurger = document.getElementById('adaptive-header-burger');
+    const adaptiveSidebar = document.getElementById("adaptive-sidebar");
+    const adaptiveSidebarCross = document.getElementById('adaptive-sidebar-cross');
 
-document.getElementById('adaptive-sidebar-cross').onclick = function closeAdaptiveSidebar() {
-    document.getElementById("adaptive-sidebar").style.width = "0";
-}
+    adaptiveHeaderBurger.onclick = function openAdaptiveSidebar() {
+        adaptiveSidebar.style.width = "250px";
+    }
+
+    adaptiveSidebarCross.onclick = function closeAdaptiveSidebar() {
+        adaptiveSidebar.style.width = "0";
+    }
+
+})();

@@ -1,5 +1,5 @@
 import {CustomHttp} from "../src/services/custom-http.js";
-import { Auth } from "../src/services/auth.js";
+import {Auth} from "../src/services/auth.js";
 import config from "../config/config.js";
 
 (function () {
@@ -23,35 +23,35 @@ import config from "../config/config.js";
             },
         ],
 
-      init () {
+        init() {
             const that = this;
-        this.fields.forEach(item => {
-            item.element = document.getElementById(item.id);
-            item.element.onchange = function () {
-                that.validateField.call(that, item, this);
+            this.fields.forEach(item => {
+                item.element = document.getElementById(item.id);
+                item.element.onchange = function () {
+                    that.validateField.call(that, item, this);
+                }
+            });
+
+            this.rememberMeElement = document.getElementById('remember-me-checkbox');
+
+            this.formButton = document.getElementById('form-button');
+            this.formButton.onclick = function () {
+                that.processForm();
             }
-        });
 
-        this.rememberMeElement = document.getElementById('remember-me-checkbox');
-
-        this.formButton = document.getElementById('form-button');
-        this.formButton.onclick = function () {
-            that.processForm();
-        }
-
-      },
+        },
 
         validateField(field, element) {
-              if (!element.value || !element.value.match(field.regex)) {
+            if (!element.value || !element.value.match(field.regex)) {
                 element.classList.add('border-danger');
                 element.nextElementSibling.setAttribute('style', 'display:block');
                 field.valid = false;
             } else {
                 element.classList.remove('border-danger');
                 element.nextElementSibling.removeAttribute('style');
-                  field.valid = true;
+                field.valid = true;
             }
-              this.validateForm();
+            this.validateForm();
         },
 
         validateForm() {
@@ -81,6 +81,11 @@ import config from "../config/config.js";
 
                         Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
 
+                        Auth.setUserInfo({
+                            userName: result.user.name + ' ' + result.user.lastName,
+                            userId: result.userId,
+                        })
+
                         // перевод на другую страницу
                         location.href = '/';
                     }
@@ -89,14 +94,10 @@ import config from "../config/config.js";
                     console.log(error);
                 }
             }
-
-            // добавить выбранность запоминания для токенов??
         }
 
     };
 
-CheckoutLogin.init();
+    CheckoutLogin.init();
 })();
-
-
 

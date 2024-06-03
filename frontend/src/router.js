@@ -2,9 +2,28 @@ import {CreateCategory} from "./components/create-category.js";
 import {EditCategory} from "./components/edit-category.js";
 import {CreateIncomeAndExpenses} from "./components/create-income-and-expenses.js";
 import {EditIncomeAndExpenses} from "./components/edit-income-and-expenses.js";
+import {Auth} from "./services/auth.js";
+import {CustomHttp} from "./services/custom-http.js";
+import config from "../config/config.js";
 
 export class Router {
     constructor() {
+
+        // если пользователь не авторизован - перебрасывать на регистрацию
+        const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        if (!accessToken) {
+            location.href = 'sign-up.html';
+            return;
+        }
+
+        this.contentElement = document.getElementById('content');
+        // нужно ли вообще? только у index собственный файл css, и там 2 свойства (перенести их в common?)
+        this.stylesElement = document.getElementById('styles');
+        this.titleElement = document.getElementById('title');
+
+        this.userName = document.getElementById('user-name');
+        this.userNameAdaptive = document.getElementById('user-info-name');
+
         this.routes = [
             {
                 route: '#/',
@@ -96,8 +115,16 @@ export class Router {
     }
 
     async openRoute() {
+        const urlRoute = window.location.hash;
+
+        if (urlRoute === '#/logout') {
+            await Auth.logout();
+            window.location.href = 'login.html';
+            return;
+        }
+
         const newRoute = this.routes.find(item => {
-            return item.route === window.location.hash.split('?')[0];
+            return item.route === urlRoute;
         });
 
         if (!newRoute) {
@@ -105,12 +132,29 @@ export class Router {
             return;
         }
 
-        document.getElementById('content').innerHTML = await fetch(newRoute.template).then(response => response.text());
+       this.contentElement.innerHTML = await fetch(newRoute.template).then(response => response.text());
 
-        // нужно ли вообще? только у index собственный файл css, и там 2 свойства (перенести их в common?)
-        document.getElementById('styles').setAttribute('href', newRoute.styles);
+       this.stylesElement.setAttribute('href', newRoute.styles);
 
-        document.getElementById('title').innerText = newRoute.title;
+       this.titleElement.innerText = newRoute.title;
+
+
+
+        // отображение имени пользователя
+        const userInfo = Auth.getUserInfo();
+        const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        if (userInfo && accessToken) {
+            this.userName.innerText = userInfo.userName;
+            this.userNameAdaptive.innerText = userInfo.userName;
+        } else {
+            this.userName.classList.add('d-none');
+            this.userNameAdaptive.classList.add('d-none');
+        }
+
+        // отображение баланса
+        const balance = await CustomHttp.request(config.host + '/balance', "GET");
+        document.getElementById('balance').innerText = JSON.stringify(balance.balance);
+        document.getElementById('balance-adaptive').innerText = JSON.stringify(balance.balance);
 
         newRoute.load();
 

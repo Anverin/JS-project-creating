@@ -27,8 +27,6 @@ module.exports = {
                 { from: "scripts", to: "scripts" },
                 { from: "login.html", to: "login.html" },
                 { from: "sign-up.html", to: "sign-up.html" },
-
-
                 { from: "config", to: "config" },
                 { from: "src/services", to: "src/services" },
             ],
