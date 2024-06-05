@@ -1,3 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/common.css";
+
+import "bootstrap/dist/js/bootstrap.min.js";
+
 import {Router} from "./router.js";
 import {SidebarMenuSections} from "../scripts/sidebar-menu-sections.js";
 

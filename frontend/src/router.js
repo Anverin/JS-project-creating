@@ -8,23 +8,31 @@ import config from "../config/config.js";
 
 export class Router {
     constructor() {
-
-        // если пользователь не авторизован - перебрасывать на регистрацию
-        const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        if (!accessToken) {
-            location.href = 'sign-up.html';
-            return;
-        }
+        //
+        // // если пользователь не авторизован - перебрасывать на регистрацию
+        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        // if (!accessToken) {
+        //     location.href = 'sign-up.html';
+        //     return;
+        // }
 
         this.contentElement = document.getElementById('content');
         // нужно ли вообще? только у index собственный файл css, и там 2 свойства (перенести их в common?)
-        this.stylesElement = document.getElementById('styles');
+        // this.stylesElement = document.getElementById('styles');
         this.titleElement = document.getElementById('title');
 
         this.userName = document.getElementById('user-name');
         this.userNameAdaptive = document.getElementById('user-info-name');
 
         this.routes = [
+            {
+                route: '#/login',
+                title: 'Авторизация',
+                template: 'templates/login.html',
+                styles: '',
+                load: () => {
+                }
+            },
             {
                 route: '#/',
                 title: 'Главная',
@@ -134,7 +142,7 @@ export class Router {
 
        this.contentElement.innerHTML = await fetch(newRoute.template).then(response => response.text());
 
-       this.stylesElement.setAttribute('href', newRoute.styles);
+       // this.stylesElement.setAttribute('href', newRoute.styles);
 
        this.titleElement.innerText = newRoute.title;
 

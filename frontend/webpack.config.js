@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: './src/app.js',
@@ -21,19 +22,39 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "templates", to: "templates" },
-                { from: "styles", to: "styles" },
-                { from: "static/fonts", to: "fonts" },
                 { from: "static/images", to: "images" },
                 { from: "scripts", to: "scripts" },
-                { from: "login.html", to: "login.html" },
-                { from: "sign-up.html", to: "sign-up.html" },
+                { from: "sign-up.html", to: "sign-up.html" },          // убрать
                 { from: "config", to: "config" },
-                { from: "src/services", to: "src/services" },
+                { from: "src/services", to: "src/services" },          // убрать
+
+
             ],
         }),
     ],
     module: {
         rules: [
+            {
+                test: /\.(css)$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    autoprefixer
+                                ]
+                            }
+                        }
+                    },
+                ]
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
