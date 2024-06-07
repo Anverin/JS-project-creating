@@ -5,32 +5,20 @@ import {EditIncomeAndExpenses} from "./components/edit-income-and-expenses.js";
 import {Auth} from "./services/auth.js";
 import {CustomHttp} from "./services/custom-http.js";
 import config from "../config/config.js";
-import {SidebarMenuSections} from "../scripts/sidebar-menu-sections.js";
-import {CheckoutLogin} from "../scripts/checkout-login.js";
-import {CheckoutSignup} from "../scripts/checkout-signup.js";
+import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
+import {CheckoutLogin} from "./services/checkout-login.js";
+import {CheckoutSignup} from "./services/checkout-signup.js";
+import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
 
 export class Router {
     constructor() {
-        //
-        // // если пользователь не авторизован - перебрасывать на регистрацию
-        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        // if (!accessToken) {
-        //     location.href = 'signup.html';
-        //     return;
-        // }
-
-        this.mainContentElement = document.getElementById('main-content');
-        this.authContentElement = document.getElementById('auth-content');
         this.titleElement = document.getElementById('title');
-        this.userName = document.getElementById('user-name');
-        this.userNameAdaptive = document.getElementById('user-info-name');
 
         this.routes = [
             {
                 route: '#/signup',
                 title: 'Регистрация',
                 template: 'templates/signup.html',
-                styles: '',
                 load: () => {
                     new CheckoutSignup();
                 }
@@ -39,7 +27,6 @@ export class Router {
                 route: '#/login',
                 title: 'Авторизация',
                 template: 'templates/login.html',
-                styles: '',
                 load: () => {
                     new CheckoutLogin();
                 }
@@ -48,7 +35,6 @@ export class Router {
                 route: '#/',
                 title: 'Главная',
                 template: 'templates/index.html',
-                styles: 'styles/index.css',
                 load: () => {
                 }
             },
@@ -56,7 +42,6 @@ export class Router {
                 route: '#/expenses',
                 title: 'Расходы',
                 template: 'templates/expenses.html',
-                styles: '',
                 load: () => {
                 }
             },
@@ -64,7 +49,6 @@ export class Router {
                 route: '#/expenses-category-create',
                 title: 'Создание категории расходов',
                 template: 'templates/expenses-category-create.html',
-                styles: '',
                 load: () => {
                     new CreateCategory();
                 }
@@ -73,7 +57,6 @@ export class Router {
                 route: '#/expenses-category-edit',
                 title: 'Редактирование категории расходов',
                 template: 'templates/expenses-category-edit.html',
-                styles: '',
                 load: () => {
                     new EditCategory();
                 }
@@ -82,7 +65,6 @@ export class Router {
                 route: '#/income',
                 title: 'Доходы',
                 template: 'templates/income.html',
-                styles: '',
                 load: () => {
                 }
             },
@@ -90,7 +72,6 @@ export class Router {
                 route: '#/income-and-expenses',
                 title: 'Доходы и расходы',
                 template: 'templates/income-and-expenses.html',
-                styles: '',
                 load: () => {
                 }
             },
@@ -98,7 +79,6 @@ export class Router {
                 route: '#/income-and-expenses-create',
                 title: 'Создание дохода/расхода',
                 template: 'templates/income-and-expenses-create.html',
-                styles: '',
                 load: () => {
                     new CreateIncomeAndExpenses();
                 }
@@ -107,7 +87,6 @@ export class Router {
                 route: '#/income-and-expenses-edit',
                 title: 'Редактирование дохода/расхода',
                 template: 'templates/income-and-expenses-edit.html',
-                styles: '',
                 load: () => {
                     new EditIncomeAndExpenses();
                 }
@@ -116,7 +95,6 @@ export class Router {
                 route: '#/income-category-create',
                 title: 'Создание категории доходов',
                 template: 'templates/income-category-create.html',
-                styles: '',
                 load: () => {
                     new CreateCategory();
                 }
@@ -125,7 +103,6 @@ export class Router {
                 route: '#/income-category-edit',
                 title: 'Создание категории доходов',
                 template: 'templates/income-category-edit.html',
-                styles: '',
                 load: () => {
                     new EditCategory();
                 }
@@ -134,15 +111,14 @@ export class Router {
     }
 
     async openRoute() {
-        const body = document.querySelector('body');
-        const test = document.getElementById('test');
+        const pageContent = document.getElementById('page-content');
 
-        const urlRoute = window.location.hash;
+        const urlRoute = location.hash;
 
         // при разлогинивании перебрасывать на логин
         if (urlRoute === '#/logout') {
             await Auth.logout();
-            window.location.hash = '#/login';
+            location.hash = '#/login';
             return;
         }
 
@@ -151,50 +127,58 @@ export class Router {
         });
 
         if (!newRoute) {
-            window.location.href = '#/';
+            location.href = '#/';
             return;
         }
 
-
+        // подставление содержимого нужного темплейта
         switch (urlRoute) {
             case '#/signup' :
-                test.innerHTML = '';
+                // по умолчанию очистить страницу
+                pageContent.innerHTML = '';
+                // найти auth-template (без сайдбара)
                 const sign = document.getElementById('auth-template');
-                test.append(sign.content.cloneNode(true));
+                // отобразить его содержимое в pageContent (будет пусто)
+                pageContent.append(sign.content.cloneNode(true));
+                // найти див внутри auth-template
                 const signContent = document.getElementById('auth-content');
+                // вставить в него ответ на запрошенный роут
                 signContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             case '#/login' :
-                test.innerHTML = '';
+                pageContent.innerHTML = '';
                 const auth = document.getElementById('auth-template');
-                test.append(auth.content.cloneNode(true));
+                pageContent.append(auth.content.cloneNode(true));
                 const authContent = document.getElementById('auth-content');
                 authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             default :
+                // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
                 if (!document.getElementById('normal-sidebar')) {
-                    test.innerHTML = '';
+                    pageContent.innerHTML = '';
                     const main = document.getElementById('main-template');
-                    test.append(main.content.cloneNode(true));
+                    pageContent.append(main.content.cloneNode(true));
                 }
                 const mainContent = document.getElementById('main-content');
                 mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 new SidebarMenuSections().changeSections();
+                new AdaptiveSidebarMove();
+
                 break;
         }
 
         // if (urlRoute !== '#/login') {
         //     // const main = document.getElementById('main-template');
-        //     // test.append(main.content.cloneNode(true));
+        //     // pageContent.append(main.content.cloneNode(true));
         //     // const content = document.getElementById('main-content');
         //     // content.innerHTML = await fetch(newRoute.template).then(response => response.text());
         //     // при смене url - очистить body и заменить контент (вставить часть с сайдбаром)
         //     if (!document.getElementById('normal-sidebar')) {
         //         // alert('совпадает');
         //         // alert('нет');
-        //         test.innerHTML = '';
+        //         pageContent.innerHTML = '';
         //         const main = document.getElementById('main-template');
-        //         test.append(main.content.cloneNode(true));
+        //         pageContent.append(main.content.cloneNode(true));
         //         // const content = document.getElementById('main-content');
         //         // content.innerHTML = await fetch(newRoute.template).then(response => response.text());
         //     }
@@ -205,9 +189,9 @@ export class Router {
         //
         //
         // } else {
-        //     test.innerHTML = '';
+        //     pageContent.innerHTML = '';
         //     const auth = document.getElementById('auth-template');
-        //     test.append(auth.content.cloneNode(true));
+        //     pageContent.append(auth.content.cloneNode(true));
         //     const content = document.getElementById('auth-content');
         //     content.innerHTML = await fetch(newRoute.template).then(response => response.text());
         // }
@@ -228,28 +212,46 @@ export class Router {
 
 
         // this.mainContentElement.innerHTML = await fetch(newRoute.template).then(response => response.text());
+
+
         this.titleElement.innerText = newRoute.title;
 
-        // if (location.hash === '#/login') {
-        //      document.getElementById('normal-sidebar').classList.remove('d-md-flex');
-        // }
 
-
-        // отображение имени пользователя
-        // const userInfo = Auth.getUserInfo();
+        // // если пользователь не авторизован - перебрасывать на логин
         // const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        // if (userInfo && accessToken) {
-        //     this.userName.innerText = userInfo.userName;
-        //     this.userNameAdaptive.innerText = userInfo.userName;
-        // } else {
-        //     this.userName.classList.add('d-none');
-        //     this.userNameAdaptive.classList.add('d-none');
+        // if (!accessToken) {
+        //     location.href = '#/login';
+        //     return;
         // }
 
-        // отображение баланса
-        // const balance = await CustomHttp.request(config.host + '/balance', "GET");
-        // document.getElementById('balance').innerText = JSON.stringify(balance.balance);
-        // document.getElementById('balance-adaptive').innerText = JSON.stringify(balance.balance);
+
+
+
+
+        switch (urlRoute) {
+            case '#/signup' :
+                break;
+            case '#/login' :
+                break;
+            default :
+                // отображение имени пользователя
+                const userInfo = Auth.getUserInfo();
+                const accessToken = localStorage.getItem(Auth.accessTokenKey);
+                const userName = document.getElementById('user-name');
+                const userNameAdaptive = document.getElementById('user-info-name');
+                if (userInfo && accessToken) {
+                    userName.innerText = userInfo.userName;
+                    userNameAdaptive.innerText = userInfo.userName;
+                } else {
+                    userName.classList.add('d-none');
+                    userNameAdaptive.classList.add('d-none');
+                }
+                // отображение баланса
+                const balance = await CustomHttp.request(config.host + '/balance', "GET");
+                document.getElementById('balance').innerText = JSON.stringify(balance.balance);
+                document.getElementById('balance-adaptive').innerText = JSON.stringify(balance.balance);
+                break;
+        }
 
         newRoute.load();
 

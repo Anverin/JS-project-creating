@@ -129,6 +129,7 @@ body {
 
 
 .charts img {
+    /*width: 437px;    !*для чартов, без %*!*/
     max-width: 437px;
     width: 100%;
     padding-left: 50px;

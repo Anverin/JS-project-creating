@@ -1,6 +1,6 @@
-import {CustomHttp} from "../src/services/custom-http.js";
-import config from "../config/config.js";
-import {Auth} from "../src/services/auth.js";
+import {CustomHttp} from "./custom-http.js";
+import config from "../../config/config.js";
+import {Auth} from "./auth.js";
 
 
 export class CheckoutSignup {

@@ -23,10 +23,8 @@ module.exports = {
             patterns: [
                 { from: "templates", to: "templates" },
                 { from: "static/images", to: "images" },
-                { from: "scripts", to: "scripts" },
-                // { from: "signup.html", to: "signup.html" },          // убрать
                 { from: "config", to: "config" },
-                { from: "src/services", to: "src/services" },          // убрать
+                { from: "src/services", to: "src/services" },
 
 
             ],
