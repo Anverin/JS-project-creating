@@ -15,9 +15,9 @@ class App {
         window.addEventListener('popstate', this.handleRouteChanging.bind(this));
 
 
-        // изменение цвета ссылок в сайдбаре
-        window.addEventListener('popstate', this.changeMenuColor.bind(this));
 
+        // изменение цвета ссылок в сайдбаре
+        // window.addEventListener('popstate', this.changeMenuColor.bind(this));
 
     }
 
@@ -26,9 +26,9 @@ class App {
     }
 
 
-    changeMenuColor() {
-        new SidebarMenuSections().changeSections();
-    }
+    // changeMenuColor() {
+    //     new SidebarMenuSections().changeSections();
+    // }
 }
 
 (new App());

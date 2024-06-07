@@ -24,7 +24,7 @@ module.exports = {
                 { from: "templates", to: "templates" },
                 { from: "static/images", to: "images" },
                 { from: "scripts", to: "scripts" },
-                { from: "sign-up.html", to: "sign-up.html" },          // убрать
+                // { from: "signup.html", to: "signup.html" },          // убрать
                 { from: "config", to: "config" },
                 { from: "src/services", to: "src/services" },          // убрать
 
