@@ -163,59 +163,10 @@ export class Router {
                 mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 new SidebarMenuSections().changeSections();
                 new AdaptiveSidebarMove();
-
                 break;
         }
 
-        // if (urlRoute !== '#/login') {
-        //     // const main = document.getElementById('main-template');
-        //     // pageContent.append(main.content.cloneNode(true));
-        //     // const content = document.getElementById('main-content');
-        //     // content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        //     // при смене url - очистить body и заменить контент (вставить часть с сайдбаром)
-        //     if (!document.getElementById('normal-sidebar')) {
-        //         // alert('совпадает');
-        //         // alert('нет');
-        //         pageContent.innerHTML = '';
-        //         const main = document.getElementById('main-template');
-        //         pageContent.append(main.content.cloneNode(true));
-        //         // const content = document.getElementById('main-content');
-        //         // content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        //     }
-        //     const content = document.getElementById('main-content');
-        //     content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        //
-        //     new SidebarMenuSections().changeSections();
-        //
-        //
-        // } else {
-        //     pageContent.innerHTML = '';
-        //     const auth = document.getElementById('auth-template');
-        //     pageContent.append(auth.content.cloneNode(true));
-        //     const content = document.getElementById('auth-content');
-        //     content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        // }
-
-        // const body = document.querySelector('body');
-        //     const auth = document.getElementById('auth-template');
-        //     body.append(auth.content.cloneNode(true));
-        //     const content = document.getElementById('auth-content');
-        //     content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        //
-        //     // if (location.href !== '#/login')
-        //     {
-        //             const main = document.getElementById('main-template');
-        //             body.append(main.content.cloneNode(true));
-        //             const content = document.getElementById('main-content');
-        //             content.innerHTML = await fetch(newRoute.template).then(response => response.text());
-        //     }
-
-
-        // this.mainContentElement.innerHTML = await fetch(newRoute.template).then(response => response.text());
-
-
         this.titleElement.innerText = newRoute.title;
-
 
         // // если пользователь не авторизован - перебрасывать на логин
         // const accessToken = localStorage.getItem(Auth.accessTokenKey);
@@ -223,9 +174,6 @@ export class Router {
         //     location.href = '#/login';
         //     return;
         // }
-
-
-
 
 
         switch (urlRoute) {

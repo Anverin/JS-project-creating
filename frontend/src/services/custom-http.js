@@ -2,9 +2,7 @@ import {Auth} from "./auth.js";
 
 export class CustomHttp {
     static async request(url, method = "GET", body = null) {
-        // Quiz4 51:00
-
-        const params = {
+            const params = {
             method: method,
             headers: {
                 'Content-type': 'application/json',

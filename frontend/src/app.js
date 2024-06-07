@@ -14,21 +14,11 @@ class App {
         this.router = new Router();    // отслеживание смены url
         window.addEventListener('popstate', this.handleRouteChanging.bind(this));
 
-
-
-        // изменение цвета ссылок в сайдбаре
-        // window.addEventListener('popstate', this.changeMenuColor.bind(this));
-
     }
 
     handleRouteChanging() {
         this.router.openRoute();
     }
-
-
-    // changeMenuColor() {
-    //     new SidebarMenuSections().changeSections();
-    // }
 }
 
 (new App());

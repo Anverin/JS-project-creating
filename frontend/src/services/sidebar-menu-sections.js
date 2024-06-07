@@ -11,7 +11,6 @@ export class SidebarMenuSections {
         this.normalSidebarCategories = document.getElementById('normal-sidebar-categories');
         this.normalSidebarCategoriesSvgWhite = document.getElementById('normal-sidebar-categories-svg-white');
         this.normalSidebarCategoriesSvgDark = document.getElementById('normal-sidebar-categories-svg-dark');
-        // this.normalSidebarCategoriesCollapse = document.getElementById('normal-sidebar-categories-collapse');
         this.normalSidebarIncome = document.getElementById('normal-sidebar-income');
         this.normalSidebarExpenses = document.getElementById('normal-sidebar-expenses');
 

@@ -25,7 +25,6 @@ export class CheckoutLogin {
             },
         ];
 
-
         const that = this;
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
@@ -41,7 +40,6 @@ export class CheckoutLogin {
             that.processForm();
         }
     }
-
 
     validateField(field, element) {
         if (!element.value || !element.value.match(field.regex)) {
