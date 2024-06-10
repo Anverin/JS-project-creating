@@ -1,18 +1,20 @@
-import {CustomHttp} from "./custom-http.js";
+import {CustomHttp} from "../services/custom-http.js";
 import config from "../../config/config.js";
-import {Auth} from "./auth.js";
+import {Auth} from "../services/auth.js";
+import {LoginBase} from "../base/login-base.js";
 
 
-export class CheckoutSignup {
-
-    // // не открывать страницу регистрации, если пользователь залогинен (есть токен)
-    // const accessToken = localStorage.getItem(Auth.accessTokenKey);
-    // if (accessToken) {
-    //     location.href = window.location.href.split('signup.html')[0] + '#/';
-    //     return;
-    // }
-
+export class Signup extends LoginBase {
     constructor() {
+        super();
+
+        // не открывать страницу регистрации, если пользователь залогинен (есть токен)
+        const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        if (accessToken) {
+            location.href = window.location.href.split('signup')[0];
+            return;
+        }
+
         this.formButton = null;
         this.fields = [
             {
@@ -113,7 +115,10 @@ export class CheckoutSignup {
                         }
 
                         // перевод на другую страницу
-                        location.href = '#/login';
+                        // location.href = '#/login';
+
+                        await this.login();
+
                     }
                 } catch (error) {
                     console.log(error);

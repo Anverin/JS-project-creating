@@ -16,8 +16,12 @@ frontend/scripts-first/
 frontend/scripts/
 
 
+
 backend/node_modules/
 backend/package-lock.json
 backend/.idea
 
+
+
+frontend/src/components/income.js
 

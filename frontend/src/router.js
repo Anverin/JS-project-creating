@@ -6,9 +6,11 @@ import {Auth} from "./services/auth.js";
 import {CustomHttp} from "./services/custom-http.js";
 import config from "../config/config.js";
 import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
-import {CheckoutLogin} from "./services/checkout-login.js";
-import {CheckoutSignup} from "./services/checkout-signup.js";
+import {Login} from "./components/login.js";
+import {Signup} from "./components/signup.js";
 import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
+import {ChangeBalance} from "./services/change-balance";
+import {Income} from "./components/income";
 
 export class Router {
     constructor() {
@@ -20,7 +22,7 @@ export class Router {
                 title: 'Регистрация',
                 template: 'templates/signup.html',
                 load: () => {
-                    new CheckoutSignup();
+                    new Signup();
                 }
             },
             {
@@ -28,7 +30,7 @@ export class Router {
                 title: 'Авторизация',
                 template: 'templates/login.html',
                 load: () => {
-                    new CheckoutLogin();
+                    new Login();
                 }
             },
             {
@@ -66,6 +68,7 @@ export class Router {
                 title: 'Доходы',
                 template: 'templates/income.html',
                 load: () => {
+                    new Income();
                 }
             },
             {
@@ -101,7 +104,7 @@ export class Router {
             },
             {
                 route: '#/income-category-edit',
-                title: 'Создание категории доходов',
+                title: 'Редактирование категории доходов',
                 template: 'templates/income-category-edit.html',
                 load: () => {
                     new EditCategory();
@@ -115,7 +118,7 @@ export class Router {
 
         const urlRoute = location.hash;
 
-        // при разлогинивании перебрасывать на логин
+       // при разлогинивании перебрасывать на логин
         if (urlRoute === '#/logout') {
             await Auth.logout();
             location.hash = '#/login';
@@ -130,6 +133,21 @@ export class Router {
             location.href = '#/';
             return;
         }
+
+        // если пользователь не авторизован - перебрасывать на логин
+        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        // if (!accessToken) {
+        //     switch (urlRoute) {
+        //         case '#/signup' :
+        //             break;
+        //         case '#/login' :
+        //             break;
+        //         default :
+        //             location.hash = '#/login';
+        //     }
+        // }
+
+
 
         // подставление содержимого нужного темплейта
         switch (urlRoute) {
@@ -163,18 +181,11 @@ export class Router {
                 mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 new SidebarMenuSections().changeSections();
                 new AdaptiveSidebarMove();
+                new ChangeBalance();
                 break;
         }
 
         this.titleElement.innerText = newRoute.title;
-
-        // // если пользователь не авторизован - перебрасывать на логин
-        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        // if (!accessToken) {
-        //     location.href = '#/login';
-        //     return;
-        // }
-
 
         switch (urlRoute) {
             case '#/signup' :
@@ -182,22 +193,26 @@ export class Router {
             case '#/login' :
                 break;
             default :
-                // отображение имени пользователя
                 const userInfo = Auth.getUserInfo();
                 const accessToken = localStorage.getItem(Auth.accessTokenKey);
                 const userName = document.getElementById('user-name');
                 const userNameAdaptive = document.getElementById('user-info-name');
+                const balanceValue = document.getElementById('balance');
+                const adaptiveBalanceValue = document.getElementById('balance-adaptive');
                 if (userInfo && accessToken) {
+                    // отображение имени пользователя
                     userName.innerText = userInfo.userName;
                     userNameAdaptive.innerText = userInfo.userName;
+                    // отображение баланса
+                    const balance = await CustomHttp.request(config.host + '/balance', "GET");
+                    balanceValue.innerText = JSON.stringify(balance.balance);
+                    adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
                 } else {
                     userName.classList.add('d-none');
                     userNameAdaptive.classList.add('d-none');
+                    balanceValue.innerText = '0';
+                    adaptiveBalanceValue.innerText = '0';
                 }
-                // отображение баланса
-                const balance = await CustomHttp.request(config.host + '/balance', "GET");
-                document.getElementById('balance').innerText = JSON.stringify(balance.balance);
-                document.getElementById('balance-adaptive').innerText = JSON.stringify(balance.balance);
                 break;
         }
 

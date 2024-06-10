@@ -141,6 +141,11 @@ body {
     max-height: 450px;
 }
 
+.balance-input {
+    width: 300px;
+    margin: 0 auto;
+}
+
 
 @media screen and (max-width: 570px) {
     .main-content .cards {

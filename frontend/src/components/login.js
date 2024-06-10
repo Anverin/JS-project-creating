@@ -1,10 +1,12 @@
-import {CustomHttp} from "./custom-http.js";
-import {Auth} from "./auth.js";
-import config from "../../config/config.js";
+// import {CustomHttp} from "../services/custom-http.js";
+// import {Auth} from "../services/auth.js";
+// import config from "../../config/config.js";
+import {LoginBase} from "../base/login-base.js";
 
-export class CheckoutLogin {
+export class Login extends LoginBase {
 
     constructor() {
+        super();
         this.rememberMeElement = null;
         this.formButton = null;
 
@@ -67,27 +69,29 @@ export class CheckoutLogin {
     async processForm() {
         if (this.validateForm()) {
             try {
-                const result = await CustomHttp.request(config.host + '/login', 'POST', {
-                    email: this.fields.find(item => item.name === 'email').element.value,
-                    password: this.fields.find(item => item.name === 'password').element.value,
-                    rememberMe: this.rememberMeElement.checked,
-                });
+                await this.login();
 
-                if (result) {
-                    if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
-                        throw new Error(result.message);
-                    }
-
-                    Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
-
-                    Auth.setUserInfo({
-                        userName: result.user.name + ' ' + result.user.lastName,
-                        userId: result.userId,
-                    })
-
-                    // перевод на другую страницу
-                    location.href = '/';
-                }
+                // const result = await CustomHttp.request(config.host + '/login', 'POST', {
+                //     email: this.fields.find(item => item.name === 'email').element.value,
+                //     password: this.fields.find(item => item.name === 'password').element.value,
+                //     rememberMe: this.rememberMeElement.checked,
+                // });
+                //
+                // if (result) {
+                //     if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
+                //         throw new Error(result.message);
+                //     }
+                //
+                //     Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
+                //
+                //     Auth.setUserInfo({
+                //         userName: result.user.name + ' ' + result.user.lastName,
+                //         userId: result.userId,
+                //     })
+                //
+                //     // перевод на другую страницу
+                //     location.href = '/';
+                // }
 
             } catch (error) {
                 console.log(error);
