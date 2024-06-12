@@ -1,7 +1,7 @@
-import {Income} from "./income";
-import {CustomHttp} from "../services/custom-http";
-import config from "../../config/config";
-import {Auth} from "../services/auth";
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
+import {Auth} from "../services/auth.js";
+import {FormValidator} from "../services/form-validator.js";
 
 export class CreateCategory {
     constructor() {
@@ -44,19 +44,8 @@ export class CreateCategory {
             element.nextElementSibling.removeAttribute('style');
             field.valid = true;
         }
-        this.validateForm();
+        FormValidator.validateForm(this.fields, this.createCategoryBtn);
     }
-
-    validateForm() {
-        const isValid = this.fields.every(item => item.valid);
-        if (isValid) {
-            this.createCategoryBtn.removeAttribute('disabled');
-        } else {
-            this.createCategoryBtn.setAttribute('disabled', 'disabled');
-        }
-        return isValid;
-    }
-
 
     // async createNewCategory() {
     //     if (this.validateForm()) {
@@ -67,7 +56,7 @@ export class CreateCategory {
     // }
 
     async createNewCategory() {
-        if (this.validateForm()) {
+        if (FormValidator.validateForm(this.fields, this.createCategoryBtn)) {
             const urlRoute = location.hash;
 
             switch (urlRoute) {

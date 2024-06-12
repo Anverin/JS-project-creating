@@ -9,8 +9,8 @@ import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
 import {Login} from "./components/login.js";
 import {Signup} from "./components/signup.js";
 import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
-import {ChangeBalance} from "./services/change-balance";
-import {Income} from "./components/income";
+import {ChangeBalance} from "./services/change-balance.js";
+import {Income} from "./components/income.js";
 
 export class Router {
     constructor() {
@@ -116,12 +116,12 @@ export class Router {
     async openRoute() {
         const pageContent = document.getElementById('page-content');
 
-        const urlRoute = location.hash;
+        const urlRoute = location.hash.split('?')[0];
 
-       // при разлогинивании перебрасывать на логин
+        // при разлогинивании перебрасывать на логин
         if (urlRoute === '#/logout') {
             await Auth.logout();
-            location.hash = '#/login';
+            location.href = '#/login';
             return;
         }
 
@@ -135,19 +135,11 @@ export class Router {
         }
 
         // если пользователь не авторизован - перебрасывать на логин
-        // const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        // if (!accessToken) {
-        //     switch (urlRoute) {
-        //         case '#/signup' :
-        //             break;
-        //         case '#/login' :
-        //             break;
-        //         default :
-        //             location.hash = '#/login';
-        //     }
-        // }
-
-
+        const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        if (!accessToken && urlRoute !== '#/signup' && urlRoute !== '#/login') {
+            location.href = '#/login';
+            return;
+        }
 
         // подставление содержимого нужного темплейта
         switch (urlRoute) {
@@ -171,6 +163,7 @@ export class Router {
                 authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             default :
+                console.log(urlRoute);
                 // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
                 if (!document.getElementById('normal-sidebar')) {
                     pageContent.innerHTML = '';
@@ -179,20 +172,7 @@ export class Router {
                 }
                 const mainContent = document.getElementById('main-content');
                 mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
-                new SidebarMenuSections().changeSections();
-                new AdaptiveSidebarMove();
-                new ChangeBalance();
-                break;
-        }
 
-        this.titleElement.innerText = newRoute.title;
-
-        switch (urlRoute) {
-            case '#/signup' :
-                break;
-            case '#/login' :
-                break;
-            default :
                 const userInfo = Auth.getUserInfo();
                 const accessToken = localStorage.getItem(Auth.accessTokenKey);
                 const userName = document.getElementById('user-name');
@@ -213,11 +193,46 @@ export class Router {
                     balanceValue.innerText = '0';
                     adaptiveBalanceValue.innerText = '0';
                 }
+
+                new SidebarMenuSections().changeSections();
+                new AdaptiveSidebarMove();
+                new ChangeBalance();
                 break;
         }
+
+        this.titleElement.innerText = newRoute.title;
 
         newRoute.load();
 
     }
 
 }
+
+
+// if (!userInfo && !accessToken) {
+//     userName.classList.add('d-none');
+//     userNameAdaptive.classList.add('d-none');
+//     balanceValue.innerText = '0';
+//     adaptiveBalanceValue.innerText = '0';
+// } else {
+//     // отображение имени пользователя
+//     userName.innerText = userInfo.userName;
+//     userNameAdaptive.innerText = userInfo.userName;
+//     // отображение баланса
+//     const balance = await CustomHttp.request(config.host + '/balance', "GET");
+//     balanceValue.innerText = JSON.stringify(balance.balance);
+//     adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
+// }
+
+
+// const accessToken = localStorage.getItem(Auth.accessTokenKey);
+// if (!accessToken) {
+//     switch (urlRoute) {
+//         case '#/signup' :
+//             break;
+//         case '#/login' :
+//             break;
+//         default :
+//             location.hash = '#/login';
+//     }
+// }

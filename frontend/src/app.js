@@ -4,7 +4,6 @@ import "../styles/common.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import {Router} from "./router.js";
-import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
 
 class App {
     constructor() {

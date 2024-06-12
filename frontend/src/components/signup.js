@@ -2,6 +2,7 @@ import {CustomHttp} from "../services/custom-http.js";
 import config from "../../config/config.js";
 import {Auth} from "../services/auth.js";
 import {LoginBase} from "../base/login-base.js";
+import {FormValidator} from "../services/form-validator.js";
 
 
 export class Signup extends LoginBase {
@@ -85,21 +86,11 @@ export class Signup extends LoginBase {
                 }
             }
 
-            this.validateForm();
-        }
-
-        validateForm() {
-            const isValid = this.fields.every(item => item.valid);
-            if (isValid) {
-                this.formButton.removeAttribute('disabled');
-            } else {
-                this.formButton.setAttribute('disabled', 'disabled');
-            }
-            return isValid;
+            FormValidator.validateForm(this.fields, this.formButton);
         }
 
         async processForm() {
-            if (this.validateForm()) {
+            if (FormValidator.validateForm(this.fields, this.formButton)) {
                 try {
                     const result = await CustomHttp.request(config.host + '/signup', 'POST', {
                         name: this.fields.find(item => item.name === 'name').element.value.split(' ')[0],

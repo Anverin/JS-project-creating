@@ -27,7 +27,7 @@ export class Auth {
         }
 
         this.removeTokens();
-        location.href = '#/signup';
+        location.href = '#/login';
         return false;
     }
 

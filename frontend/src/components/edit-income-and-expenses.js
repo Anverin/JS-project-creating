@@ -1,3 +1,5 @@
+import {FormValidator} from "../services/form-validator.js";
+
 export class EditIncomeAndExpenses {
     constructor() {
     this.formButton = null;
@@ -58,22 +60,12 @@ export class EditIncomeAndExpenses {
                 field.value = element.value;
                 field.valid = true;
 
-                this.validateForm();
+                FormValidator.validateForm(this.fields, this.formButton);
             }
-        }
-
-        validateForm() {
-            const isValid = this.fields.every(item => item.valid);
-            if (isValid) {
-                this.formButton.removeAttribute('disabled');
-            } else {
-                this.formButton.setAttribute('disabled', 'disabled');
-            }
-            return isValid;
         }
 
         processForm() {
-            if (this.validateForm()) {
+            if (FormValidator.validateForm(this.fields, this.formButton)) {
                 // перевод на другую страницу
                 location.href = '#/income-and-expenses'
             }
