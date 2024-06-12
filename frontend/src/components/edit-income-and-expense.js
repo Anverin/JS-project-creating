@@ -1,6 +1,6 @@
 import {FormValidator} from "../services/form-validator.js";
 
-export class EditIncomeAndExpenses {
+export class EditIncomeAndExpense {
     constructor() {
     this.formButton = null;
         this.fields = [
@@ -67,7 +67,7 @@ export class EditIncomeAndExpenses {
         processForm() {
             if (FormValidator.validateForm(this.fields, this.formButton)) {
                 // перевод на другую страницу
-                location.href = '#/income-and-expenses'
+                location.href = '#/income-and-expense'
             }
         }
 

@@ -12,8 +12,9 @@
                 </select>
                 <div class="invalid-feedback ms-2">Выберите тип дохода/расхода</div>
 
-                <input type="text" class="category-input form-control mt-2 border rounded"
-                       placeholder="Категория..." id="budget-category" required>
+                <select class="category-input form-control mt-2 border rounded" id="budget-category" required>
+                    <option value="" disabled selected hidden>Категория...</option>
+                </select>
                 <div class="invalid-feedback ms-2">Введите категорию</div>
 
                 <input type="text" onkeyup="value = value.replace(/[^\d]/g,'')" class="category-input form-control mt-2 border rounded"
@@ -30,12 +31,15 @@
 
                 <textarea cols="30" rows="1" class="category-input form-control mt-2 border rounded"
                             placeholder="Комментарий..." id="budget-comment"></textarea>
+                <div class="invalid-feedback ms-2">
+                    Введите комментарий
+                </div>
 
 
                 <div class="create-income-category-buttons mt-4 d-flex">
                     <button type="button" class="btn btn-success px-3 me-2" id="create-budget-button" disabled>Создать
                     </button>
-                    <a href="#/income-and-expenses" class="btn btn-danger px-3">Отмена</a>
+                    <a href="#/income-and-expense" class="btn btn-danger px-3">Отмена</a>
                 </div>
             </div>
         </form>

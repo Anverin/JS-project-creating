@@ -10,9 +10,15 @@ export class ChangeBalance {
 
         const that = this;
 
-        this.changeBalanceBtn.onclick = function () {
-            that.changeBalanceManually().then();
+        this.accessToken = localStorage.getItem(Auth.accessTokenKey);
+
+        if (this.accessToken) {
+            this.changeBalanceBtn.onclick = function () {
+                that.changeBalanceManually().then();
+            }
         }
+
+
     }
 
     async changeBalanceManually() {

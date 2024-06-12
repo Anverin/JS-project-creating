@@ -1,16 +1,17 @@
 import {CreateCategory} from "./components/create-category.js";
 import {EditCategory} from "./components/edit-category.js";
-import {CreateIncomeAndExpenses} from "./components/create-income-and-expenses.js";
-import {EditIncomeAndExpenses} from "./components/edit-income-and-expenses.js";
+import {CreateIncomeAndExpense} from "./components/create-income-and-expense.js";
+import {EditIncomeAndExpense} from "./components/edit-income-and-expense.js";
 import {Auth} from "./services/auth.js";
 import {CustomHttp} from "./services/custom-http.js";
 import config from "../config/config.js";
 import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
 import {Login} from "./components/login.js";
 import {Signup} from "./components/signup.js";
-import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
+// import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
 import {ChangeBalance} from "./services/change-balance.js";
-import {Income} from "./components/income.js";
+import {Categories} from "./components/categories.js";
+import {IncomeAndExpense} from "./components/income-and-expense.js";
 
 export class Router {
     constructor() {
@@ -41,24 +42,25 @@ export class Router {
                 }
             },
             {
-                route: '#/expenses',
+                route: '#/expense',
                 title: 'Расходы',
-                template: 'templates/expenses.html',
+                template: 'templates/expense.html',
                 load: () => {
+                    new Categories();
                 }
             },
             {
-                route: '#/expenses-category-create',
+                route: '#/expense-category-create',
                 title: 'Создание категории расходов',
-                template: 'templates/expenses-category-create.html',
+                template: 'templates/expense-category-create.html',
                 load: () => {
                     new CreateCategory();
                 }
             },
             {
-                route: '#/expenses-category-edit',
+                route: '#/expense-category-edit',
                 title: 'Редактирование категории расходов',
-                template: 'templates/expenses-category-edit.html',
+                template: 'templates/expense-category-edit.html',
                 load: () => {
                     new EditCategory();
                 }
@@ -68,30 +70,31 @@ export class Router {
                 title: 'Доходы',
                 template: 'templates/income.html',
                 load: () => {
-                    new Income();
+                    new Categories();
                 }
             },
             {
-                route: '#/income-and-expenses',
+                route: '#/income-and-expense',
                 title: 'Доходы и расходы',
-                template: 'templates/income-and-expenses.html',
+                template: 'templates/income-and-expense.html',
                 load: () => {
+                    new IncomeAndExpense();
                 }
             },
             {
-                route: '#/income-and-expenses-create',
+                route: '#/income-and-expense-create',
                 title: 'Создание дохода/расхода',
-                template: 'templates/income-and-expenses-create.html',
+                template: 'templates/income-and-expense-create.html',
                 load: () => {
-                    new CreateIncomeAndExpenses();
+                    new CreateIncomeAndExpense();
                 }
             },
             {
-                route: '#/income-and-expenses-edit',
+                route: '#/income-and-expense-edit',
                 title: 'Редактирование дохода/расхода',
-                template: 'templates/income-and-expenses-edit.html',
+                template: 'templates/income-and-expense-edit.html',
                 load: () => {
-                    new EditIncomeAndExpenses();
+                    new EditIncomeAndExpense();
                 }
             },
             {
@@ -163,7 +166,9 @@ export class Router {
                 authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             default :
-                console.log(urlRoute);
+
+                // console.log(urlRoute);
+
                 // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
                 if (!document.getElementById('normal-sidebar')) {
                     pageContent.innerHTML = '';
@@ -185,8 +190,11 @@ export class Router {
                     userNameAdaptive.innerText = userInfo.userName;
                     // отображение баланса
                     const balance = await CustomHttp.request(config.host + '/balance', "GET");
-                    balanceValue.innerText = JSON.stringify(balance.balance);
-                    adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
+                    if (balance) {
+                        balanceValue.innerText = JSON.stringify(balance.balance);
+                        adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
+                    }
+
                 } else {
                     userName.classList.add('d-none');
                     userNameAdaptive.classList.add('d-none');
@@ -195,7 +203,7 @@ export class Router {
                 }
 
                 new SidebarMenuSections().changeSections();
-                new AdaptiveSidebarMove();
+                // new AdaptiveSidebarMove();
                 new ChangeBalance();
                 break;
         }

@@ -9,15 +9,11 @@ export class EditCategory {
 
         this.categoryId = location.href.split('=')[1];
 
-
-
-        // this.categoryTitle = null;
-
         this.page = null;
         this.splitHash = location.hash.split('?')[0];
         if ( this.splitHash === '#/income-category-edit') {
             this.page = '/categories/income/'
-        } else if ( this.splitHash === '#/expenses-category-edit') {
+        } else if ( this.splitHash === '#/expense-category-edit') {
             this.page = '/categories/expense/'
         }
 
@@ -33,12 +29,9 @@ export class EditCategory {
         ];
 
         const that = this;
+
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
-            console.log(item.id, item);
-            // if (item.element === null) {
-            //    let a = 5;
-            // }
             item.element.onchange = function () {
                 that.validateField.call(that, item, this);
             }
@@ -54,7 +47,6 @@ export class EditCategory {
 
     async getCategoryTitle(id) {
         const result = await CustomHttp.request(config.host + this.page + id, "GET");
-        // this.categoryTitle = result.title;
         this.fields[0].element.value = result.title;
     }
 
@@ -83,7 +75,7 @@ export class EditCategory {
 
             // await CustomHttp.request(config.host + '/categories/income/' + id, "PUT", {"title": this.newCategoryNameInput.value});
 
-            location.href = '#/income-and-expenses'
+            location.href = '#/income-and-expense'
         }
     }
 

@@ -51,7 +51,7 @@ export class CreateCategory {
     //     if (this.validateForm()) {
     //         let result = await CustomHttp.request(config.host + '/categories/income', "POST", {"title": this.newCategoryInput.value});
     //         console.log(result);
-    //         location.href = '#/income-and-expenses'
+    //         location.href = '#/income-and-expense'
     //     }
     // }
 
@@ -63,12 +63,12 @@ export class CreateCategory {
                 case '#/income-category-create' :
                     let result = await CustomHttp.request(config.host + '/categories/income', "POST", {"title": this.newCategoryInput.value});
                     console.log(result);
-                    location.href = '#/income-and-expenses';
+                    location.href = '#/income-and-expense';
                     break;
-                case '#/expenses-category-create' :
+                case '#/expense-category-create' :
                     let result1 = await CustomHttp.request(config.host + '/categories/expense', "POST", {"title": this.newCategoryInput.value});
                     console.log(result1);
-                    location.href = '#/income-and-expenses';
+                    location.href = '#/income-and-expense';
                     break;
                 default :
                     break;
@@ -139,7 +139,7 @@ export class CreateCategory {
 //         if (this.validateForm()) {
 //             await CustomHttp.request(config.host + '/categories/income', "POST", {"title": this.changBalanceInput.value});
 //
-//             location.href = '#/income-and-expenses'
+//             location.href = '#/income-and-expense'
 //         }
 //     }
 // }

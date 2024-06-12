@@ -1,8 +1,11 @@
 import {FormValidator} from "../services/form-validator.js";
+import {CustomHttp} from "../services/custom-http";
+import config from "../../config/config";
 
-export class CreateIncomeAndExpenses {
+export class CreateIncomeAndExpense {
     constructor() {
             this.formButton = null;
+
             this.fields = [
                 {
                     name: 'type',
@@ -11,13 +14,13 @@ export class CreateIncomeAndExpenses {
                     valid: false,
                 },
                 {
-                    name: 'category',
+                    name: 'category_id',
                     id: 'budget-category',
                     element: null,
                     valid: false,
                 },
                 {
-                    name: 'sum',
+                    name: 'amount',
                     id: 'budget-sum',
                     element: null,
                     regex:  /^[1-9][0-9]*\$?$/,
@@ -30,13 +33,23 @@ export class CreateIncomeAndExpenses {
                     element: null,
                     valid: false,
                 },
+                {
+                    name: 'comment',
+                    id: 'budget-comment',
+                    element: null,
+                    valid: false,
+                },
             ];
+
 
                 const that = this;
                 this.fields.forEach(item => {
                     item.element = document.getElementById(item.id);
                     item.element.onchange = function () {
                         that.validateField.call(that, item, this);
+                        if (item.name === 'type') {
+                            that.selectCategory().then();
+                        }
                     }
                 });
 
@@ -44,7 +57,32 @@ export class CreateIncomeAndExpenses {
                 this.formButton.onclick = function () {
                     that.processForm();
                 }
+
     }
+
+      async selectCategory() {  // должна подтягивать базу и отрисовывать опции в цикле
+          const budgetCategory = document.getElementById('budget-category');
+
+          const budgetType = document.getElementById('budget-type');        // может быть income/expense
+
+          const budgetCategories = await CustomHttp.request(config.host + '/categories/' + budgetType.value, "GET");
+
+          budgetCategory.innerHTML = '';
+
+          const categoryPlaceholder = document.createElement('option');
+          categoryPlaceholder.innerText = 'Категория...';
+          budgetCategory.appendChild(categoryPlaceholder);
+
+          budgetCategories.forEach(category => {
+                  const categorySelect = document.createElement('option');
+                  categorySelect.innerText = category.title;
+                  categorySelect.setAttribute('value', category.id);
+                  budgetCategory.appendChild(categorySelect);
+              });
+
+        }
+
+
             validateField(field, element) {
                 if (!element.value || !element.value.match(field.regex)) {
                     element.classList.add('border-danger');
@@ -59,10 +97,27 @@ export class CreateIncomeAndExpenses {
                 FormValidator.validateForm(this.fields, this.formButton);
             }
 
-            processForm() {
+           async processForm() {
                 if (FormValidator.validateForm(this.fields, this.formButton)) {
                     // перевод на другую страницу
-                    location.href = '#/income-and-expenses'
+                    // location.href = '#/income-and-expense'
+
+                    const createCategoryData = this.fields.reduce(function (result, field) {
+                        return {
+                            ...result,
+                            [field.name]: field.element.value,
+                        }
+                    }, {})
+
+                    console.log(createCategoryData);
+
+
+                    let result = await CustomHttp.request(config.host + '/operations', "POST", createCategoryData);
+                    console.log(result);
+                    location.href = '#/income-and-expense';
+
+
+
                 }
             }
 }
