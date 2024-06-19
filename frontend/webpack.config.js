@@ -25,8 +25,6 @@ module.exports = {
                 { from: "static/images", to: "images" },
                 { from: "config", to: "config" },
                 { from: "src/services", to: "src/services" },
-
-
             ],
         }),
     ],

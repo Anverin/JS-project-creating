@@ -1,6 +1,6 @@
 import {Auth} from "./auth.js";
 
-export class SidebarMenuSections {
+export class Sidebar {
     constructor() {
         this.adaptiveHeaderBurger = document.getElementById('adaptive-header-burger');
         this.adaptiveSidebar = document.getElementById("adaptive-sidebar");

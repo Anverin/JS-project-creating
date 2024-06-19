@@ -11,7 +11,7 @@ export class EditCategory {
 
         this.page = null;
         this.splitHash = location.hash.split('?')[0];
-        if ( this.splitHash === '#/income-category-edit') {
+        if (this.splitHash === '#/income-category-edit') {
             this.page = '/categories/income/'
         } else if ( this.splitHash === '#/expense-category-edit') {
             this.page = '/categories/expense/'

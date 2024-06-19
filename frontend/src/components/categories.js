@@ -133,15 +133,15 @@ export class Categories {
 
             const that = this;
 
-            console.log(categoryId);
+            // console.log(categoryId);
 
-            const confirmDeleteCategoryBtnElement = document.getElementById('confirm-delete-category-btn');
+            const confirmDeleteCategoryBtn = document.getElementById('confirm-delete-category-btn');
 
             deleteBtnElement.onclick = function () {
                 // переназначить обработчик для кнопки в поп-апе
-                confirmDeleteCategoryBtnElement.onclick = function () {
+                confirmDeleteCategoryBtn.onclick = function () {
                     console.log(categoryId);
-                    that.deleteCategory(categoryId);
+                    that.deleteCategory(categoryId).then();
                 }
             }
             //

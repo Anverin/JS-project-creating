@@ -63,12 +63,12 @@ export class CreateCategory {
                 case '#/income-category-create' :
                     let result = await CustomHttp.request(config.host + '/categories/income', "POST", {"title": this.newCategoryInput.value});
                     console.log(result);
-                    location.href = '#/income-and-expense';
+                    location.href = '#/income';
                     break;
                 case '#/expense-category-create' :
                     let result1 = await CustomHttp.request(config.host + '/categories/expense', "POST", {"title": this.newCategoryInput.value});
                     console.log(result1);
-                    location.href = '#/income-and-expense';
+                    location.href = '#/expense';
                     break;
                 default :
                     break;

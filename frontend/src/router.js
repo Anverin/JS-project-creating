@@ -5,13 +5,13 @@ import {EditIncomeAndExpense} from "./components/edit-income-and-expense.js";
 import {Auth} from "./services/auth.js";
 import {CustomHttp} from "./services/custom-http.js";
 import config from "../config/config.js";
-import {SidebarMenuSections} from "./services/sidebar-menu-sections.js";
+import {Sidebar} from "./services/sidebar.js";
 import {Login} from "./components/login.js";
 import {Signup} from "./components/signup.js";
-// import {AdaptiveSidebarMove} from "./services/adaptive-sidebar-move.js";
 import {ChangeBalance} from "./services/change-balance.js";
 import {Categories} from "./components/categories.js";
 import {IncomeAndExpense} from "./components/income-and-expense.js";
+import {Charts} from "./services/charts.js";
 
 export class Router {
     constructor() {
@@ -39,6 +39,7 @@ export class Router {
                 title: 'Главная',
                 template: 'templates/index.html',
                 load: () => {
+                    new Charts();
                 }
             },
             {
@@ -202,7 +203,7 @@ export class Router {
                     adaptiveBalanceValue.innerText = '0';
                 }
 
-                new SidebarMenuSections().changeSections();
+                new Sidebar().changeSections();
                 // new AdaptiveSidebarMove();
                 new ChangeBalance();
                 break;

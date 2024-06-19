@@ -4,122 +4,133 @@ import config from "../../config/config";
 
 export class CreateIncomeAndExpense {
     constructor() {
-            this.formButton = null;
+        this.formButton = null;
 
-            this.fields = [
-                {
-                    name: 'type',
-                    id: 'budget-type',
-                    element: null,
-                    valid: false,
-                },
-                {
-                    name: 'category_id',
-                    id: 'budget-category',
-                    element: null,
-                    valid: false,
-                },
-                {
-                    name: 'amount',
-                    id: 'budget-sum',
-                    element: null,
-                    regex:  /^[1-9][0-9]*\$?$/,
-                    // regex:  /^[1-9][0-9]*(?:\.[0-9]+)?\$?$/,    // с дробным числом
-                    valid: false,
-                },
-                {
-                    name: 'date',
-                    id: 'budget-date',
-                    element: null,
-                    valid: false,
-                },
-                {
-                    name: 'comment',
-                    id: 'budget-comment',
-                    element: null,
-                    valid: false,
-                },
-            ];
+        this.fields = [
+            {
+                name: 'type',
+                id: 'budget-type',
+                element: null,
+                valid: true,
+            },
+            {
+                name: 'category_id',
+                id: 'budget-category',
+                element: null,
+                valid: false,
+            },
+            {
+                name: 'amount',
+                id: 'budget-sum',
+                element: null,
+                regex: /^[1-9][0-9]*\$?$/,
+                // regex:  /^[1-9][0-9]*(?:\.[0-9]+)?\$?$/,    // с дробным числом
+                valid: false,
+            },
+            {
+                name: 'date',
+                id: 'budget-date',
+                element: null,
+                valid: false,
+            },
+            {
+                name: 'comment',
+                id: 'budget-comment',
+                element: null,
+                valid: false,
+            },
+        ];
 
 
-                const that = this;
-                this.fields.forEach(item => {
-                    item.element = document.getElementById(item.id);
-                    item.element.onchange = function () {
-                        that.validateField.call(that, item, this);
-                        if (item.name === 'type') {
-                            that.selectCategory().then();
-                        }
-                    }
-                });
-
-                this.formButton = document.getElementById('create-budget-button');
-                this.formButton.onclick = function () {
-                    that.processForm();
+        const that = this;
+        this.fields.forEach(item => {
+            item.element = document.getElementById(item.id);
+            item.element.onchange = function () {
+                that.validateField.call(that, item, this);
+                if (item.name === 'type') {
+                    that.selectCategory().then();
                 }
+            }
+        });
 
-    }
-
-      async selectCategory() {  // должна подтягивать базу и отрисовывать опции в цикле
-          const budgetCategory = document.getElementById('budget-category');
-
-          const budgetType = document.getElementById('budget-type');        // может быть income/expense
-
-          const budgetCategories = await CustomHttp.request(config.host + '/categories/' + budgetType.value, "GET");
-
-          budgetCategory.innerHTML = '';
-
-          const categoryPlaceholder = document.createElement('option');
-          categoryPlaceholder.innerText = 'Категория...';
-          budgetCategory.appendChild(categoryPlaceholder);
-
-          budgetCategories.forEach(category => {
-                  const categorySelect = document.createElement('option');
-                  categorySelect.innerText = category.title;
-                  categorySelect.setAttribute('value', category.id);
-                  budgetCategory.appendChild(categorySelect);
-              });
-
+        this.formButton = document.getElementById('create-budget-button');
+        this.formButton.onclick = function () {
+            that.processForm();
         }
 
+        this.selectInitialType();
+    }
 
-            validateField(field, element) {
-                if (!element.value || !element.value.match(field.regex)) {
-                    element.classList.add('border-danger');
-                    element.nextElementSibling.setAttribute('style', 'display:block');
-                    field.valid = false;
-                } else {
-                    element.classList.remove('border-danger');
-                    element.nextElementSibling.removeAttribute('style');
-                    field.valid = true;
-                }
-
-                FormValidator.validateForm(this.fields, this.formButton);
+    selectInitialType() {
+        const budgetType = location.href.split('?')[1];
+        document.getElementById('budget-type').childNodes.forEach(item => {
+            if (item.value === budgetType) {
+                item.setAttribute('selected', 'true')
             }
+        });
 
-           async processForm() {
-                if (FormValidator.validateForm(this.fields, this.formButton)) {
-                    // перевод на другую страницу
-                    // location.href = '#/income-and-expense'
+        this.selectCategory().then();
+    }
 
-                    const createCategoryData = this.fields.reduce(function (result, field) {
-                        return {
-                            ...result,
-                            [field.name]: field.element.value,
-                        }
-                    }, {})
+    async selectCategory() {  // должна подтягивать базу и отрисовывать опции в цикле
+        const budgetCategory = document.getElementById('budget-category');
 
-                    console.log(createCategoryData);
+        const budgetType = document.getElementById('budget-type');        // может быть income/expense
+
+        const budgetCategories = await CustomHttp.request(config.host + '/categories/' + budgetType.value, "GET");
+
+        budgetCategory.innerHTML = '';
+
+        const categoryPlaceholder = document.createElement('option');
+        categoryPlaceholder.innerText = 'Категория...';
+        budgetCategory.appendChild(categoryPlaceholder);
+
+        budgetCategories.forEach(category => {
+            const categorySelect = document.createElement('option');
+            categorySelect.innerText = category.title;
+            categorySelect.setAttribute('value', category.id);
+            budgetCategory.appendChild(categorySelect);
+        });
+    }
 
 
-                    let result = await CustomHttp.request(config.host + '/operations', "POST", createCategoryData);
-                    console.log(result);
-                    location.href = '#/income-and-expense';
+    validateField(field, element) {
+        if (!element.value || !element.value.match(field.regex)) {
+            element.classList.add('border-danger');
+            element.nextElementSibling.setAttribute('style', 'display:block');
+            field.valid = false;
+        } else {
+            element.classList.remove('border-danger');
+            element.nextElementSibling.removeAttribute('style');
+            field.valid = true;
+        }
 
+        FormValidator.validateForm(this.fields, this.formButton);
+    }
 
+    async processForm() {
+        if (FormValidator.validateForm(this.fields, this.formButton)) {
 
+            const createCategoryData = this.fields.reduce(function (result, field) {
+                return {
+                    ...result,
+                    [field.name]: field.element.value,
                 }
-            }
+            }, {})
+
+            console.log(createCategoryData);
+
+            createCategoryData.category_id = parseInt(createCategoryData.category_id);
+
+
+            console.log(createCategoryData);
+
+
+            let result = await CustomHttp.request(config.host + '/operations', "POST", createCategoryData);
+            console.log(result);
+            location.href = '#/income-and-expense';
+        }
+    }
 }
 
 

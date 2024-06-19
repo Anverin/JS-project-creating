@@ -129,9 +129,9 @@ body {
 
 
 .charts img {
-    /*width: 437px;    !*для чартов, без %*!*/
-    max-width: 437px;
-    width: 100%;
+    width: 437px;    /*для чартов, без %*/
+    /*max-width: 437px;*/
+    /*width: 100%;*/
     padding-left: 50px;
     padding-right: 50px;;
     margin-bottom: 80px;;
@@ -144,6 +144,11 @@ body {
 .balance-input {
     width: 300px;
     margin: 0 auto;
+}
+
+.filters input {
+    width: 90px;
+    text-align: center;
 }
 
 

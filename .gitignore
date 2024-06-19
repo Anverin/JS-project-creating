@@ -15,7 +15,10 @@ frontend/dist/
 frontend/scripts-first/
 frontend/scripts/
 
+frontend/chart-test.html
+frontend/chart-test.js
 
+frontend/src/services/adaptive-sidebar-move.js
 
 backend/node_modules/
 backend/package-lock.json
