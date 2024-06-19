@@ -2,3 +2,25 @@ plan.txt
 .idea/
 frontend/index-test.html
 frontend/styles/index-test.css
+frontend/styles/index.css
+frontend/styles/bootstrap.min.css
+openapi.yaml
+Backend for JS project.postman_collection.json
+frontend/node_modules/
+frontend/scripts/create-category.js
+frontend/scripts/create-income-and-expense.js
+frontend/scripts/edit-category.js
+frontend/scripts/edit-income-and-expense.js
+frontend/dist/
+frontend/scripts-first/
+frontend/scripts/
+
+
+
+backend/node_modules/
+backend/package-lock.json
+backend/.idea
+
+
+
+
