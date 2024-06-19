@@ -41,7 +41,6 @@ export class CreateIncomeAndExpense {
             },
         ];
 
-
         const that = this;
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
@@ -118,13 +117,11 @@ export class CreateIncomeAndExpense {
                 }
             }, {})
 
-            console.log(createCategoryData);
+            // console.log(createCategoryData);
 
             createCategoryData.category_id = parseInt(createCategoryData.category_id);
 
-
-            console.log(createCategoryData);
-
+            // console.log(createCategoryData);
 
             let result = await CustomHttp.request(config.host + '/operations', "POST", createCategoryData);
             console.log(result);

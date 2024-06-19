@@ -167,9 +167,6 @@ export class Router {
                 authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             default :
-
-                // console.log(urlRoute);
-
                 // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
                 if (!document.getElementById('normal-sidebar')) {
                     pageContent.innerHTML = '';
@@ -195,7 +192,6 @@ export class Router {
                         balanceValue.innerText = JSON.stringify(balance.balance);
                         adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
                     }
-
                 } else {
                     userName.classList.add('d-none');
                     userNameAdaptive.classList.add('d-none');
@@ -204,7 +200,6 @@ export class Router {
                 }
 
                 new Sidebar().changeSections();
-                // new AdaptiveSidebarMove();
                 new ChangeBalance();
                 break;
         }
@@ -212,36 +207,6 @@ export class Router {
         this.titleElement.innerText = newRoute.title;
 
         newRoute.load();
-
     }
 
 }
-
-
-// if (!userInfo && !accessToken) {
-//     userName.classList.add('d-none');
-//     userNameAdaptive.classList.add('d-none');
-//     balanceValue.innerText = '0';
-//     adaptiveBalanceValue.innerText = '0';
-// } else {
-//     // отображение имени пользователя
-//     userName.innerText = userInfo.userName;
-//     userNameAdaptive.innerText = userInfo.userName;
-//     // отображение баланса
-//     const balance = await CustomHttp.request(config.host + '/balance', "GET");
-//     balanceValue.innerText = JSON.stringify(balance.balance);
-//     adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
-// }
-
-
-// const accessToken = localStorage.getItem(Auth.accessTokenKey);
-// if (!accessToken) {
-//     switch (urlRoute) {
-//         case '#/signup' :
-//             break;
-//         case '#/login' :
-//             break;
-//         default :
-//             location.hash = '#/login';
-//     }
-// }

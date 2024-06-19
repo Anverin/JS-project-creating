@@ -12,7 +12,6 @@ export class Categories {
         // кнопка подтверждения удаления в поп-апе
         this.confirmDeleteCategoryBtnElement = null;
 
-
         // для универсальности кода для доходов и расходов
         this.typeCategories = null;
         this.page = null;
@@ -29,28 +28,7 @@ export class Categories {
         const that = this;
 
         this.init().then();
-
-
-
-
-        // this.confirmDeleteCategoryBtnElement = document.getElementById('confirm-delete-category-btn');
-        // this.confirmDeleteCategoryBtnElement.onclick = function () {
-        //     that.deleteCategory(that.categoryId);
-        // }
-
-        // this.deleteCategory();
-        // this.categoryDeleteBtnElement.onclick = function () {
-        //     that.deleteCategory().then();
-        // }
     }
-
-    // async deleteCategory(id) {
-    //       if (this.accessToken) {
-    //         await CustomHttp.request(config.host + this.page + id, "DELETE");
-    //         // location.reload();
-    //     }
-    // }
-
 
     // запрос имеющихся в базе категорий (функция записывает массив с ними в переменную в конструкторе)
     async init() {
@@ -62,8 +40,7 @@ export class Categories {
                         throw new Error(result.error);
                     }
                     this.categories = result;
-
-                    console.log(result);
+                    // console.log(result);
 
                     this.showIncomeCategories();
                 }
@@ -87,7 +64,6 @@ export class Categories {
         const typeCategories = this.typeCategories;
 
         this.categories.forEach(category => {
-
            const categoryId = category.id;
            const categoryTitle = category.title;
 
@@ -104,9 +80,7 @@ export class Categories {
             cardTitleElement.innerHTML = categoryTitle;
 
             const editBtnElement = document.createElement('a');
-            // const editBtnElement = document.createElement('button');
             editBtnElement.classList.add('btn', 'btn-primary', 'mb-2', 'me-2');
-            // editBtnElement.setAttribute('href', '#/income-category-edit');
             editBtnElement.innerText = 'Редактировать';
 
             const deleteBtnElement = document.createElement('button');
@@ -130,7 +104,6 @@ export class Categories {
                 location.href = '#/' + typeCategories + '-category-edit?id=' + categoryId;
             }
 
-
             const that = this;
 
             // console.log(categoryId);
@@ -144,31 +117,11 @@ export class Categories {
                     that.deleteCategory(categoryId).then();
                 }
             }
-            //
-            // confirmDeleteCategoryBtnElement.onclick = function () {
-            //     console.log(categoryId);
-            //     // здесь должна вызываться удаляющая фукнция, принимающая id категории
-            //     that.deleteCategory();
-            //     // that.deleteCategory(categoryId);
-            // }
-
-
-            // this.deleteCategory();
-            // this.categoryDeleteBtnElement.onclick = function () {
-            //     await that.deleteCategory().then();
-            // }
-            //
-
-
-
         });
-
 
         // добавить поле добавления категории в конец их списка
         this.newCategoryCreateField = document.getElementById('new-category-create-field');
         this.cardsElement.appendChild(this.newCategoryCreateField);
-        // }
-
     }
 
     async deleteCategory(id) {
@@ -180,47 +133,3 @@ export class Categories {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const confirmDeleteBtnElement = document.createElement('button');
-// confirmDeleteBtnElement.classList.add('btn', 'btn-success', 'me-2');
-// confirmDeleteBtnElement.setAttribute('data-bs-dismiss', 'modal');
-// confirmDeleteBtnElement.innerText = 'Да, удалить';
-// confirmDeleteBtnElement.id = '1';
-//
-// const doNotDeleteBtnElement = document.createElement('button');
-// doNotDeleteBtnElement.classList.add('btn', 'btn-danger');
-// doNotDeleteBtnElement.setAttribute('data-bs-dismiss', 'modal');
-// doNotDeleteBtnElement.innerText = 'Не удалять';
-//
-// const modalButtonsElement = document.createElement('div');
-// modalButtonsElement.classList.add('modal-buttons', 'mb-3');
-// modalButtonsElement.appendChild(confirmDeleteBtnElement);
-// modalButtonsElement.appendChild(doNotDeleteBtnElement);
-//
-// const modalBodyElement = document.createElement('div');
-// modalBodyElement.classList.add('modal-body', 'mb-2');
-// modalBodyElement.innerText = 'Вы действительно хотите удалить категорию?';
-//
-// const modalContentElement = document.createElement('div');
-// modalContentElement.classList.add('modal-content', 'py-3', 'fw-bold');
-// modalContentElement.appendChild(modalBodyElement);
-// modalContentElement.appendChild(modalButtonsElement);
-//
-// const modalDialogElement = document.createElement('div');
-// modalDialogElement.classList.add('modal-dialog', 'modal-dialog-centered', 'text-center');
-// modalDialogElement.appendChild(modalContentElement);
-//
-// const deletePopUpElement = document.getElementById('delete-category');
-// deletePopUpElement.appendChild(modalDialogElement);

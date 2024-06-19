@@ -17,8 +17,6 @@ export class ChangeBalance {
                 that.changeBalanceManually().then();
             }
         }
-
-
     }
 
     async changeBalanceManually() {
@@ -26,6 +24,5 @@ export class ChangeBalance {
             await CustomHttp.request(config.host + '/balance', "PUT", {"newBalance": this.changeBalanceInput.value});
             location.reload();
         }
-
     }
 }

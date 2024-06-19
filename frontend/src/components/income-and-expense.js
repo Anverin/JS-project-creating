@@ -13,14 +13,11 @@ export class IncomeAndExpense {
         this.createExpenseBtn = document.getElementById('create-expense-btn');
         this.transferToCreateExpense();
 
-
         // переменная для массива доходов/расходов
         // this.budgetItems = null;
+
         // переменная для хранения родительского элемента  - тела таблицы
         this.tableBodyElement = null;
-
-
-        // this.period = null;
 
         this.intervals = {
             "today": document.getElementById('today'),
@@ -40,7 +37,6 @@ export class IncomeAndExpense {
         const that = this;
 
         this.init().then();
-
 
         this.intervalBtn.onclick = function () {
             that.intervalBtn.classList.add('active');
@@ -75,21 +71,13 @@ export class IncomeAndExpense {
                 that.getCalendarDates(that.calendarDates);
             }
         });
-
     }
-
-
 
     // запрос имеющихся в базе строк бюджета (функция записывает массив с ними в переменную в конструкторе)
     async init() {
-
-
         this.changeInterval();
         this.intervals.today.click();
-
-
     }
-
 
     // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
     changeInterval() {
@@ -108,17 +96,7 @@ export class IncomeAndExpense {
                 periodButton.classList.add('active');
 
                 that.prevButton = periodButton;
-
-                // const todayButton = document.getElementById('today');
-                // if (period !== 'today') {
-                //     todayButton.classList.remove('active');
-                // } else {
-                //     todayButton.classList.add('active');
-                // }
-
-                // that.showBudgetItems(this.result);
             }
-
         }
     }
 
@@ -138,11 +116,8 @@ export class IncomeAndExpense {
                     if (budgetRecords.error) {
                         throw new Error(budgetRecords.error);
                     }
-                    // this.budgetItems = budgetRecords;
 
-                    console.log(budgetRecords);
-
-                    // this.showBudgetItems(this.budgetItems);
+                    // console.log(budgetRecords);
 
                     this.showBudgetItems(budgetRecords);
                 }
@@ -150,16 +125,6 @@ export class IncomeAndExpense {
                 console.log(error);
             }
         }
-
-        const that = this;
-
-        // let budgetRecords = await CustomHttp.request(config.host + '/operations?period=' + period, "GET");
-
-        // console.log(budgetRecords);
-
-        // this.showBudgetItems(budgetRecords);
-
-        // return budgetRecords;
     }
 
     // показывает категории
@@ -183,7 +148,6 @@ export class IncomeAndExpense {
             const amount = item.amount;
             const date = item.date.split('-')[2] + '.' + item.date.split('-')[1] + '.' + item.date.split('-')[0];
             const comment = item.comment;
-
 
             const tableStringElement = document.createElement('tr');
 
@@ -268,7 +232,6 @@ export class IncomeAndExpense {
 
             this.tableBodyElement.appendChild(tableStringElement);
 
-
             editSvgElement.onclick = function () {
                 // переход на страницу редактирования с сохранением id в href для переноса (в функции openRoute от href отсекается все лишнее, это не повлияет на загрузку нужной страницы)
                 location.href = '#/income-and-expense-edit?id=' + budgetItemId;
@@ -290,8 +253,8 @@ export class IncomeAndExpense {
 
     async deleteBudgetItem(id) {
         if (this.accessToken) {
-            // await CustomHttp.request(config.host + '/operations/' + id, "DELETE");
-            // location.reload();
+            await CustomHttp.request(config.host + '/operations/' + id, "DELETE");
+            location.reload();
         }
     }
 

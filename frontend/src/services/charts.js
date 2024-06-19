@@ -61,29 +61,7 @@ export class Charts {
 
         this.changeInterval();
         this.intervals.today.click();
-        // this.charts();
-
-        // this.incomeChart = null;
-
-
-
     }
-
-
-    // async getBudgetItems() {
-    //     const budgetItems = await CustomHttp.request(config.host + '/operations?period=' + 'all', "GET");
-    //
-    //     console.log(budgetItems);
-    //
-    //     return budgetItems;
-    // }
-
-//     if (this.incomeChart) {
-//     const that = this;
-//     that.incomeChart.destroy();
-// }
-
-
 
     // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
     changeInterval() {
@@ -103,7 +81,6 @@ export class Charts {
 
                 that.prevButton = periodButton;
             }
-
         }
     }
 
@@ -112,7 +89,7 @@ export class Charts {
         this.getBudgetItems(datesIntervalString).then();
     }
 
-    // работает, дает массив записей за указанный на кнопке период
+    // запрашивает массив записей за указанный на кнопке период
     async getBudgetItems(period) {
 
         if (this.accessToken) {
@@ -124,11 +101,10 @@ export class Charts {
                         throw new Error(budgetItems.error);
                     }
 
-                    console.log(budgetItems);
+                    // console.log(budgetItems);
 
                     this.charts(budgetItems);
                     return budgetItems;
-
                 }
             } catch (error) {
                 console.log(error);
@@ -137,174 +113,52 @@ export class Charts {
     }
 
 
+    async charts(budgetItems) {
+        // очищать canvas, чтобы можно было заново отрисовать диаграмму при смене периода
+        if (this.incomeChart) {
+            this.incomeChart.destroy();
+        }
+        if (this.expenseChart) {
+            this.expenseChart.destroy();
+        }
 
-  async charts(budgetItems) {
-      // console.log('#####', this.ttt);
-      if (this.ttt) {
-          console.log(this.ttt);
-      }
-
-      if (this.incomeChart) {
-          this.incomeChart.destroy();
-      }
-      if (this.expenseChart) {
-          this.expenseChart.destroy();
-      }
-
-
-       const budgetItemsAmount = budgetItems.reduce((object1, value) => {
-           // записать по ключу категории число из строки с суммой, если такой категории в массиве еще нет - прибавить 0, иначе прибавить прежнее значение
-          object1[value.type][value.category] = parseInt(value.amount) + (!object1[value.type][value.category] ? 0 : object1[value.type][value.category]);
-           return {...object1};
-       }, {income: {}, expense: {}});
-       const incomeAmounts = Object.values(budgetItemsAmount.income);
-       // console.log(incomeAmounts);
-       const incomeCategoriesLabels = Object.keys(budgetItemsAmount.income);
-       // console.log(incomeCategoriesLabels);
-       const expenseAmounts = Object.values(budgetItemsAmount.expense);
-       // console.log(expenseAmounts);
-       const expenseCategoriesLabels = Object.keys(budgetItemsAmount.expense);
-       // console.log(expenseCategoriesLabels);
+        const budgetItemsAmount = budgetItems.reduce((object1, value) => {
+            // записать по ключу категории число из строки с суммой, если такой категории в массиве еще нет - прибавить 0, иначе прибавить прежнее значение
+            object1[value.type][value.category] = parseInt(value.amount) + (!object1[value.type][value.category] ? 0 : object1[value.type][value.category]);
+            return {...object1};
+        }, {income: {}, expense: {}});
+        const incomeAmounts = Object.values(budgetItemsAmount.income);
+        // console.log(incomeAmounts);
+        const incomeCategoriesLabels = Object.keys(budgetItemsAmount.income);
+        // console.log(incomeCategoriesLabels);
+        const expenseAmounts = Object.values(budgetItemsAmount.expense);
+        // console.log(expenseAmounts);
+        const expenseCategoriesLabels = Object.keys(budgetItemsAmount.expense);
+        // console.log(expenseCategoriesLabels);
 
         let plotIncomeChart = document.querySelector('#income-chart');
 
-      this.incomeChart = new Chart(plotIncomeChart, {
+        this.incomeChart = new Chart(plotIncomeChart, {
             type: 'pie',
             data: {
                 labels: incomeCategoriesLabels,   //названия категорий
                 datasets: [{
-                    // label: '# of Votes',
                     data: incomeAmounts,  // количество денег в категории
                     borderWidth: 0
                 }]
             },
         });
 
-       // if (this.changeInterval) {
-       //     incomeChart.destroy();
-       // }
-// incomeChart.destroy();
-
-
-
-
-
-       let plotExpenseChart = document.querySelector('#expense-chart');
-       this.expenseChart = new Chart(plotExpenseChart, {
-           type: 'pie',
-           data: {
-               labels: expenseCategoriesLabels,
-               datasets: [{
-                   data: expenseAmounts,
-                   borderWidth: 0
-               }]
-           },
-       });
-
-// expenseChart.destroy();
-
-      this.ttt = this.ttt + "ann_good!";
-      // console.log('????????', this.ttt);
-
-
-
+        let plotExpenseChart = document.querySelector('#expense-chart');
+        this.expenseChart = new Chart(plotExpenseChart, {
+            type: 'pie',
+            data: {
+                labels: expenseCategoriesLabels,
+                datasets: [{
+                    data: expenseAmounts,
+                    borderWidth: 0
+                }]
+            },
+        });
     }
-
-
-
-
-
-
-
 }
-
-
-
-
-
-//
-// let incomeChart = new Chart({
-//
-// })
-//
-//
-//
-// // let ctx = document.getElementById('income-chart').getContext('2d');
-// // let labels = ['aaa', 'bbb', 'ccc'];
-// // let colorHex = ['#eeeeee', '#434343', '#343434'];
-// //
-// // let incomeChart = new Chart(ctx, {
-// //     type: 'pie',
-// //     data: {
-// //         datasets: [{
-// //             data: [30, 10, 60],
-// //             backgroundColor: colorHex
-// //         }],
-// //         labels: labels
-// //     },
-// //     options: {
-// //         responsive: true
-// //     }
-// // })
-
-
-
-// let a = {
-//     income: {
-//         '+2' : 500,
-//     },
-//     expense: {
-//         '-2' : 500,
-//     }
-// }
-// a['income']['+2']
-
-// console.log(incomeItemsAmount);
-
-
-// let Chart = require('chart.js/auto');
-
-// const incomeCategories = await CustomHttp.request(config.host + '/categories/income', "GET");
-// console.log(incomeCategories);
-
-// const incomeCategoriesLabels = incomeCategories.map(item => {
-//     return item.title;
-// });
-// console.log(incomeCategoriesLabels);
-
-
-// const budgetItems = await this.getBudgetItems();
-// console.log(budgetItems);
-// const incomeItems = budgetItems.filter(item => {
-//     if (item.type === 'income') {
-//         return item;
-//     }
-// });
-// console.log(incomeItems);
-
-
-// options: {
-//     scales: {
-//         y: {
-//             beginAtZero: true
-//         }
-//     }
-// }
-
-// const data = {
-//     labels: ['aaa', 'bbb', 'ccc'],
-//     datasets: [
-//         {
-//             data: [30, 10, 60],
-//             // backgroundColor: colorHex,
-//             label: 'Income'
-//         }
-//     ]
-// }
-// const incomeChart = new Chart(plotIncomeChart, {
-//     // type: 'pie',
-//     data: data,
-// })
-
-
-// alert(1212121);

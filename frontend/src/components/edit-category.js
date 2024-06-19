@@ -51,7 +51,6 @@ export class EditCategory {
     }
 
 
-
     validateField(field, element) {
         if (!element.value) {
             element.classList.add('border-danger');
@@ -65,7 +64,6 @@ export class EditCategory {
 
         FormValidator.validateForm(this.fields, this.formButton);
     }
-
 
 
   processForm(id) {

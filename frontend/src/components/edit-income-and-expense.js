@@ -92,9 +92,6 @@ export class EditIncomeAndExpense {
                 }
         });
 
-        this.findSelectedCategory(result.category);
-
-        // this.selectCategory(result.type).then();
         this.selectCategory(result.category).then();
     }
 
@@ -119,21 +116,8 @@ export class EditIncomeAndExpense {
             if (category.title === categoryName) {
                 categorySelect.setAttribute('selected', 'true');
             }
-
         });
-
-
-
     }
-
-
-    // проверить, какое название категории у операции, установить его selected
-    findSelectedCategory(categoryId) {
-        // if (categorySelect.innerText === )
-    }
-
-
-
 
     validateField(field, element) {
         if (!element.value || !element.value.match(field.regex)) {
@@ -159,20 +143,17 @@ export class EditIncomeAndExpense {
                 }
             }, {})
 
-            console.log(newCategoryData);
+            // console.log(newCategoryData);
 
             newCategoryData.category_id = parseInt(newCategoryData.category_id);
 
-            console.log(newCategoryData);
+            // console.log(newCategoryData);
 
             let result = await CustomHttp.request(config.host + '/operations/' + this.categoryId, "PUT", newCategoryData);
             console.log(result);
             location.href = '#/income-and-expense';
         }
-
     }
-
-
 }
 
 

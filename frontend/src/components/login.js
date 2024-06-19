@@ -1,6 +1,3 @@
-// import {CustomHttp} from "../services/custom-http.js";
-// import {Auth} from "../services/auth.js";
-// import config from "../../config/config.js";
 import {LoginBase} from "../base/login-base.js";
 import {FormValidator} from "../services/form-validator.js";
 
@@ -36,7 +33,6 @@ export class Login extends LoginBase {
                     that.validateField.call(that, item, this);
                 }
             }
-
         });
 
         this.rememberMeElement = document.getElementById('remember-me-checkbox');
@@ -75,31 +71,3 @@ export class Login extends LoginBase {
     }
 
 }
-
-
-
-
-
-
-
-// const result = await CustomHttp.request(config.host + '/login', 'POST', {
-//     email: this.fields.find(item => item.name === 'email').element.value,
-//     password: this.fields.find(item => item.name === 'password').element.value,
-//     rememberMe: this.rememberMeElement.checked,
-// });
-//
-// if (result) {
-//     if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
-//         throw new Error(result.message);
-//     }
-//
-//     Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
-//
-//     Auth.setUserInfo({
-//         userName: result.user.name + ' ' + result.user.lastName,
-//         userId: result.userId,
-//     })
-//
-//     // перевод на другую страницу
-//     location.href = '/';
-// }

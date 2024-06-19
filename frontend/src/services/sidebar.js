@@ -52,7 +52,6 @@ export class Sidebar {
             activeLink.forEach(item => {
                 item.classList.add('active');
             });
-
         }
 
         if (window.location.hash === '#/income' || window.location.hash === '#/expense') {
@@ -72,7 +71,6 @@ export class Sidebar {
             this.normalSidebarExpense.classList.remove('border', 'border-top-0', 'border-primary');
         }
 
-
         // для адаптивного сайдбара
         if (window.location.hash === '#/income' || window.location.hash === '#/expense') {
             this.adaptiveSidebarCategories.classList.add('active');
@@ -88,10 +86,7 @@ export class Sidebar {
             this.adaptiveSidebarExpense.classList.remove('border', 'border-top-0', 'border-primary');
         }
 }
-
 }
-
-
 
     openAdaptiveSidebar() {
         this.adaptiveSidebar.style.width = "250px";

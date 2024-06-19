@@ -38,14 +38,4 @@ export class LoginBase {
             location.href = '/';
         }
     }
-
 }
-
-
-
-
-// const result = await CustomHttp.request(config.host + '/login', 'POST', {
-//     email: this.fields.find(item => item.name === 'email').element.value,
-//     password: this.fields.find(item => item.name === 'password').element.value,
-//     rememberMe: this.rememberMeElement.checked,
-// });
