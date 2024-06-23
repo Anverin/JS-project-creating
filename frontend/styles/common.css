@@ -151,10 +151,19 @@ body {
     text-align: center;
 }
 
+@media screen and (max-width: 638px) {
+    .income-and-expense-table {
+        width: 580px;
+    }
+}
 
 @media screen and (max-width: 570px) {
     .main-content .cards {
         margin-right: 50px;
+    }
+
+    .income-and-expense-table {
+        width: 530px;
     }
 }
 
@@ -166,11 +175,19 @@ body {
     .category-input {
         max-width: 350px;
     }
+
+    .income-and-expense-table {
+        width: 490px;
+    }
 }
 
 @media screen and (max-width: 430px) {
     .category-input {
         max-width: 300px;
+    }
+
+    .income-and-expense-table {
+        width: 360px;
     }
 }
 
@@ -178,5 +195,9 @@ body {
     .category-input {
         max-width: 250px;
         margin-right: 20px;
+    }
+
+    .income-and-expense-table {
+        width: 300px;
     }
 }

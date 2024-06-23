@@ -11,7 +11,7 @@ import {Signup} from "./components/signup.js";
 import {ChangeBalance} from "./services/change-balance.js";
 import {Categories} from "./components/categories.js";
 import {IncomeAndExpense} from "./components/income-and-expense.js";
-import {Charts} from "./services/charts.js";
+import {Main} from "./components/main.js";
 
 export class Router {
     constructor() {
@@ -39,7 +39,7 @@ export class Router {
                 title: 'Главная',
                 template: 'templates/index.html',
                 load: () => {
-                    new Charts();
+                    new Main();
                 }
             },
             {
