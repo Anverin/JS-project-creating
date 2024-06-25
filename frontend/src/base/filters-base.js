@@ -21,8 +21,6 @@ export class FiltersBase {
         this.dateFrom = document.getElementById('date-from');
         this.dateTo = document.getElementById('date-to');
 
-
-
         this.calendarDates = {
             dateFrom: null,
             dateTo: null
@@ -32,13 +30,11 @@ export class FiltersBase {
             buttons: ['today', 'clear'],
             // range: true,
             // multipleDatesSeparator: ' по ',
-
             onSelect({date, formattedDate, datepicker}
             ) {
                 that.calendarDates.dateFrom = date;
                 that.getCalendarDates(that.calendarDates);
             }
-
         });
 
         new AirDatepicker('#date-to', {
@@ -67,7 +63,6 @@ export class FiltersBase {
         let datesIntervalString = 'interval&dateFrom=' + dates.dateFrom + '&dateTo=' + dates.dateTo;
         this.getOperations(datesIntervalString).then();
     }
-
 
     // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
     changeInterval() {
@@ -107,7 +102,6 @@ export class FiltersBase {
                     } else if (location.hash === '#/income-and-expense') {
                         this.showBudgetItems(operations);
                     }
-
                 }
             } catch (error) {
                 console.log(error);

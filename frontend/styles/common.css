@@ -28,11 +28,6 @@ body {
     color: var(--bs-primary);
 }
 
-/*.sidebar ul li a:hover {*/
-/*    background-color: var(--bs-primary);*/
-/*    color: white;*/
-/*}*/
-
 .normal-sidebar {
     width: 219px;
     font-size: small;
@@ -151,7 +146,14 @@ body {
     text-align: center;
 }
 
-@media screen and (max-width: 638px) {
+.operation-number-th, .actions-svg {
+    /*text-wrap: nowrap;*/
+    white-space: nowrap;
+}
+
+
+
+@media screen and (max-width: 767px) {
     .income-and-expense-table {
         width: 580px;
     }

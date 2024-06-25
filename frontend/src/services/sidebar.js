@@ -5,6 +5,7 @@ export class Sidebar {
         this.adaptiveHeaderBurger = document.getElementById('adaptive-header-burger');
         this.adaptiveSidebar = document.getElementById("adaptive-sidebar");
         this.adaptiveSidebarCross = document.getElementById('adaptive-sidebar-cross');
+        this.changeBalanceModal = document.getElementById('change-balance-modal');
 
         this.accessToken = localStorage.getItem(Auth.accessTokenKey);
 
@@ -18,6 +19,13 @@ export class Sidebar {
             this.adaptiveSidebarCross.onclick = function () {
                 that.closeAdaptiveSidebar();
             }
+
+            // закрывание сайдбара по клику мимо него
+            document.addEventListener('click', (e) => {
+                if (!e.composedPath().includes(that.adaptiveSidebar) && !e.composedPath().includes(that.adaptiveHeaderBurger) && !e.composedPath().includes(that.changeBalanceModal)) {
+                    that.adaptiveSidebar.style.width = "0";
+                }
+            })
         }
 
         this.normalSidebarCategories = document.getElementById('normal-sidebar-categories');

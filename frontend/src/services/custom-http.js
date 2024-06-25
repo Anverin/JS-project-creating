@@ -26,7 +26,7 @@ export class CustomHttp {
             if (response.status === 401) {
                 const result = await Auth.processUnauthorizedResponse();
                 if (result) {
-                    return await this.request();
+                    return await this.request(url, method, body);
                 } else {
                     return null;
                 }

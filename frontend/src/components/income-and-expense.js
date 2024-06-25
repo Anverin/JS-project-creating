@@ -66,6 +66,7 @@ export class IncomeAndExpense extends FiltersBase {
             commentElement.innerText = comment;
 
             const actionsElement = document.createElement('td');
+            actionsElement.classList.add('actions-svg');
             const deleteSvgElement = document.createElement('a');
             deleteSvgElement.classList.add('me-2');
             deleteSvgElement.setAttribute('data-bs-toggle', 'modal');
@@ -120,13 +121,18 @@ export class IncomeAndExpense extends FiltersBase {
     }
 
     transferToCreateIncome() {
-        this.createIncomeBtn.onclick = function () {
-            location.href = '#/income-and-expense-create?income';
+        if (this.accessToken) {
+            this.createIncomeBtn.onclick = function () {
+                location.href = '#/income-and-expense-create?income';
+            }
         }
+
     }
     transferToCreateExpense() {
-        this.createExpenseBtn.onclick = function () {
-            location.href = '#/income-and-expense-create?expense';
+        if (this.accessToken) {
+            this.createExpenseBtn.onclick = function () {
+                location.href = '#/income-and-expense-create?expense';
+            }
         }
     }
 

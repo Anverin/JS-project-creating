@@ -187,11 +187,13 @@ export class Router {
                     userName.innerText = userInfo.userName;
                     userNameAdaptive.innerText = userInfo.userName;
                     // отображение баланса
-                    const balance = await CustomHttp.request(config.host + '/balance', "GET");
-                    if (balance) {
-                        balanceValue.innerText = JSON.stringify(balance.balance);
-                        adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
-                    }
+                    await new ChangeBalance().getBalance();
+
+                    // const balance = await CustomHttp.request(config.host + '/balance', "GET");
+                    // if (balance) {
+                    //     balanceValue.innerText = JSON.stringify(balance.balance);
+                    //     adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
+                    // }
                 } else {
                     userName.classList.add('d-none');
                     userNameAdaptive.classList.add('d-none');
@@ -200,7 +202,7 @@ export class Router {
                 }
 
                 new Sidebar().changeSections();
-                new ChangeBalance();
+                // new ChangeBalance(); // // создавался, чтобы клик по кнопке баланса мог менять баланс; впоследствии его вызов здесь стал необязателен, т.к. выше создается экземляр этого класса + сразу вызывается одна из его функций
                 break;
         }
 
