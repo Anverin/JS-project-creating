@@ -60,29 +60,11 @@ export class FiltersBase {
     }
 
     getCalendarDates(dates) {
-        let datesIntervalString = 'interval&dateFrom=' + dates.dateFrom + '&dateTo=' + dates.dateTo;
-        this.getOperations(datesIntervalString).then();
+        this.datesIntervalString = 'interval&dateFrom=' + dates.dateFrom + '&dateTo=' + dates.dateTo;
     }
 
-    // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
     changeInterval() {
-        const that = this;
         this.prevButton = this.intervals.today;
-
-        for (let period in this.intervals) {
-            let periodButton = this.intervals[period];   // (там поиск по id)
-            periodButton.onclick = function () {      // задание кнопке периода функции запроса
-
-                that.getOperations(period).then();    // передача названия периода запрашивающей функции
-
-                that.intervalInputs.classList.add('d-none');
-
-                that.prevButton.classList.remove('active');
-                periodButton.classList.add('active');
-
-                that.prevButton = periodButton;
-            }
-        }
     }
 
     // запрашивает массив записей за указанный на кнопке период
@@ -97,11 +79,7 @@ export class FiltersBase {
                     }
                     // console.log(operations);
 
-                    if (location.hash === '#/') {       // без условия вызывается только одна из них
-                        this.charts(operations);
-                    } else if (location.hash === '#/income-and-expense') {
-                        this.showBudgetItems(operations);
-                    }
+                    return operations;
                 }
             } catch (error) {
                 console.log(error);

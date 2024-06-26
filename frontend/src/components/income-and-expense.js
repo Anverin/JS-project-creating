@@ -15,6 +15,34 @@ export class IncomeAndExpense extends FiltersBase {
         this.tableBodyElement = null;
     }
 
+    getCalendarDates(dates) {
+        super.getCalendarDates(dates);
+
+        this.getOperations(this.datesIntervalString).then(operations => {
+            this.showBudgetItems(operations);
+        })
+    }
+
+    // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
+    changeInterval() {
+        super.changeInterval();
+
+        for (let period in this.intervals) {
+                    let periodButton = this.intervals[period];   // (там поиск по id)
+                    periodButton.onclick = () => {      // задание кнопке периода функции запроса
+                                                       // передача названия периода запрашивающей функции
+                        this.getOperations(period).then(operations => this.showBudgetItems(operations));
+
+                        this.intervalInputs.classList.add('d-none');
+
+                        this.prevButton.classList.remove('active');
+                        periodButton.classList.add('active');
+
+                        this.prevButton = periodButton;
+                    }
+                }
+    }
+
     // показывает строки бюджета в таблице (вызывается в filters-base.js)
     showBudgetItems(budgetItems) {
         // объявление всеобщего родителя

@@ -145,9 +145,47 @@ export class Router {
             return;
         }
 
+
+        // if (urlRoute !== '#/signup' || urlRoute !== '#/login') {
+        //     pageContent.innerHTML = '';
+        //     const sign = document.getElementById('auth-template');
+        //     pageContent.append(sign.content.cloneNode(true));
+        //     const signContent = document.getElementById('auth-content');
+        //     signContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
+        // } else {
+        //     if (!document.getElementById('normal-sidebar')) {
+        //         pageContent.innerHTML = '';
+        //         const main = document.getElementById('main-template');
+        //         pageContent.append(main.content.cloneNode(true));
+        //     }
+        //     const mainContent = document.getElementById('main-content');
+        //     mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
+        //
+        //     const userInfo = Auth.getUserInfo();
+        //     const accessToken = localStorage.getItem(Auth.accessTokenKey);
+        //     const userName = document.getElementById('user-name');
+        //     const userNameAdaptive = document.getElementById('user-info-name');
+        //     const balanceValue = document.getElementById('balance');
+        //     const adaptiveBalanceValue = document.getElementById('balance-adaptive');
+        //     if (userInfo && accessToken) {
+        //         // отображение имени пользователя
+        //         userName.innerText = userInfo.userName;
+        //         userNameAdaptive.innerText = userInfo.userName;
+        //         // отображение баланса
+        //         await new ChangeBalance().getBalance();
+        //     } else {
+        //         userName.classList.add('d-none');
+        //         userNameAdaptive.classList.add('d-none');
+        //         balanceValue.innerText = '0';
+        //         adaptiveBalanceValue.innerText = '0';
+        //     }
+        //     new Sidebar().changeSections();
+        // }
+
         // подставление содержимого нужного темплейта
         switch (urlRoute) {
             case '#/signup' :
+            case '#/login' :
                 // по умолчанию очистить страницу
                 pageContent.innerHTML = '';
                 // найти auth-template (без сайдбара)
@@ -158,13 +196,6 @@ export class Router {
                 const signContent = document.getElementById('auth-content');
                 // вставить в него ответ на запрошенный роут
                 signContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
-                break;
-            case '#/login' :
-                pageContent.innerHTML = '';
-                const auth = document.getElementById('auth-template');
-                pageContent.append(auth.content.cloneNode(true));
-                const authContent = document.getElementById('auth-content');
-                authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
                 break;
             default :
                 // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
@@ -188,12 +219,6 @@ export class Router {
                     userNameAdaptive.innerText = userInfo.userName;
                     // отображение баланса
                     await new ChangeBalance().getBalance();
-
-                    // const balance = await CustomHttp.request(config.host + '/balance', "GET");
-                    // if (balance) {
-                    //     balanceValue.innerText = JSON.stringify(balance.balance);
-                    //     adaptiveBalanceValue.innerText = JSON.stringify(balance.balance);
-                    // }
                 } else {
                     userName.classList.add('d-none');
                     userNameAdaptive.classList.add('d-none');
@@ -212,3 +237,16 @@ export class Router {
     }
 
 }
+
+
+
+
+
+
+// case '#/login' :
+//     pageContent.innerHTML = '';
+//     const auth = document.getElementById('auth-template');
+//     pageContent.append(auth.content.cloneNode(true));
+//     const authContent = document.getElementById('auth-content');
+//     authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
+//     break;

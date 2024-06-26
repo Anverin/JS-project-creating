@@ -10,7 +10,7 @@ export class Categories {
         this.cardsElement = null;
 
         // кнопка подтверждения удаления в поп-апе
-        this.confirmDeleteCategoryBtnElement = null;
+        // this.confirmDeleteCategoryBtnElement = null;
 
         // для универсальности кода для доходов и расходов
         this.typeCategories = null;
@@ -25,7 +25,7 @@ export class Categories {
 
         this.accessToken = localStorage.getItem(Auth.accessTokenKey);
 
-        const that = this;
+        // const that = this;
 
         this.init().then();
     }

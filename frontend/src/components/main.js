@@ -7,6 +7,35 @@ export class Main extends FiltersBase {
         super();
     }
 
+    getCalendarDates(dates) {
+        super.getCalendarDates(dates);
+
+        this.getOperations(this.datesIntervalString).then(operations => {
+            this.charts(operations);
+        })
+    }
+
+    // проходится по массиву, где ключи - названия кнопок, а значения - поиск по id (придает кнопкам функцию вызова записей)
+    changeInterval() {
+        super.changeInterval();
+
+        for (let period in this.intervals) {
+            let periodButton = this.intervals[period];   // (там поиск по id)
+            periodButton.onclick = () => {      // задание кнопке периода функции запроса
+                // передача названия периода запрашивающей функции
+                this.getOperations(period).then(operations => this.charts(operations));
+
+                this.intervalInputs.classList.add('d-none');
+
+                this.prevButton.classList.remove('active');
+                periodButton.classList.add('active');
+
+                this.prevButton = periodButton;
+            }
+        }
+    }
+
+
 // (вызывается в filters-base.js)
     charts(operations) {
         // очищать canvas, чтобы можно было заново отрисовать диаграмму при смене периода
