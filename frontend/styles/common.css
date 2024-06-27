@@ -152,11 +152,11 @@ body {
 }
 
 
-@media screen and (max-width: 991px) {
-    .income-and-expense-table {
-        width: 720px;
-    }
-}
+/*@media screen and (max-width: 991px) {*/
+/*    .income-and-expense-table {*/
+/*        width: 580px;*/
+/*    }*/
+/*}*/
 
 @media screen and (max-width: 767px) {
     .income-and-expense-table {
