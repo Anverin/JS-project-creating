@@ -13,6 +13,13 @@ export class IncomeAndExpense extends FiltersBase {
 
         // переменная для хранения родительского элемента - тела таблицы
         this.tableBodyElement = null;
+
+        this.initToday();
+    }
+
+    initToday() {
+        this.intervals.today.classList.add('active');
+        this.getOperations('today').then(operations => this.showBudgetItems(operations));
     }
 
     getCalendarDates(dates) {

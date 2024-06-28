@@ -21,11 +21,11 @@ export class Sidebar {
             }
 
             // закрывание сайдбара по клику мимо него
-            document.addEventListener('click', (e) => {
+            document.onclick = (e) => {
                 if (!e.composedPath().includes(that.adaptiveSidebar) && !e.composedPath().includes(that.adaptiveHeaderBurger) && !e.composedPath().includes(that.changeBalanceModal)) {
-                    that.adaptiveSidebar.style.width = "0";
+                    this.closeAdaptiveSidebar();
                 }
-            })
+            }
         }
 
         this.normalSidebarCategories = document.getElementById('normal-sidebar-categories');
@@ -45,6 +45,7 @@ export class Sidebar {
 
     changeSections() {
         if (this.accessToken) {
+            this.closeAdaptiveSidebar();
 
         // перебрать все ссылки и удалить класс active
         this.links.forEach(link => link.classList.remove('active'));

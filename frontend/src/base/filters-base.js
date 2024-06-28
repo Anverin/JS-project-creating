@@ -55,7 +55,6 @@ export class FiltersBase {
             };
 
             this.changeInterval();
-            this.intervals.today.click();
         }
     }
 

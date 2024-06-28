@@ -5,6 +5,12 @@ export class Main extends FiltersBase {
 
     constructor() {
         super();
+        this.initToday();
+    }
+
+    initToday() {
+        this.intervals.today.classList.add('active');
+        this.getOperations('today').then(operations => this.charts(operations));
     }
 
     getCalendarDates(dates) {
