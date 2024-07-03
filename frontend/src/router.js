@@ -3,8 +3,6 @@ import {EditCategory} from "./components/edit-category.js";
 import {CreateIncomeAndExpense} from "./components/create-income-and-expense.js";
 import {EditIncomeAndExpense} from "./components/edit-income-and-expense.js";
 import {Auth} from "./services/auth.js";
-import {CustomHttp} from "./services/custom-http.js";
-import config from "../config/config.js";
 import {Sidebar} from "./services/sidebar.js";
 import {Login} from "./components/login.js";
 import {Signup} from "./components/signup.js";
@@ -187,65 +185,3 @@ export class Router {
     }
 
 }
-
-
-
-
-
-
-// case '#/login' :
-//     pageContent.innerHTML = '';
-//     const auth = document.getElementById('auth-template');
-//     pageContent.append(auth.content.cloneNode(true));
-//     const authContent = document.getElementById('auth-content');
-//     authContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
-//     break;
-
-// подставление содержимого нужного темплейта
-// switch (urlRoute) {
-//     case '#/signup' :
-//     case '#/login' :
-//         // по умолчанию очистить страницу
-//         pageContent.innerHTML = '';
-//         // найти auth-template (без сайдбара)
-//         const sign = document.getElementById('auth-template');
-//         // отобразить его содержимое в pageContent (будет пусто)
-//         pageContent.append(sign.content.cloneNode(true));
-//         // найти див внутри auth-template
-//         const signContent = document.getElementById('auth-content');
-//         // вставить в него ответ на запрошенный роут
-//         signContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
-//         break;
-//     default :
-//         // очищать страницу полностью, только если на ней нет сайдбара (это страница регистрации/логина)
-//         if (!document.getElementById('normal-sidebar')) {
-//             pageContent.innerHTML = '';
-//             const main = document.getElementById('main-template');
-//             pageContent.append(main.content.cloneNode(true));
-//         }
-//         const mainContent = document.getElementById('main-content');
-//         mainContent.innerHTML = await fetch(newRoute.template).then(response => response.text());
-//
-//         const userInfo = Auth.getUserInfo();
-//         const accessToken = localStorage.getItem(Auth.accessTokenKey);
-//         const userName = document.getElementById('user-name');
-//         const userNameAdaptive = document.getElementById('user-info-name');
-//         const balanceValue = document.getElementById('balance');
-//         const adaptiveBalanceValue = document.getElementById('balance-adaptive');
-//         if (userInfo && accessToken) {
-//             // отображение имени пользователя
-//             userName.innerText = userInfo.userName;
-//             userNameAdaptive.innerText = userInfo.userName;
-//             // отображение баланса
-//             await new ChangeBalance().getBalance();
-//         } else {
-//             userName.classList.add('d-none');
-//             userNameAdaptive.classList.add('d-none');
-//             balanceValue.innerText = '0';
-//             adaptiveBalanceValue.innerText = '0';
-//         }
-//
-//         new Sidebar().changeSections();
-//         // new ChangeBalance(); // // создавался, чтобы клик по кнопке баланса мог менять баланс; впоследствии его вызов здесь стал необязателен, т.к. выше создается экземляр этого класса + сразу вызывается одна из его функций
-//         break;
-// }

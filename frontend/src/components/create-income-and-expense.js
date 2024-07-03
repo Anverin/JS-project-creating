@@ -24,7 +24,6 @@ export class CreateIncomeAndExpense {
                 id: 'budget-sum',
                 element: null,
                 regex: /^[1-9][0-9]*\$?$/,
-                // regex:  /^[1-9][0-9]*(?:\.[0-9]+)?\$?$/,    // с дробным числом
                 valid: false,
             },
             {
@@ -117,11 +116,7 @@ export class CreateIncomeAndExpense {
                 }
             }, {})
 
-            // console.log(createCategoryData);
-
             createCategoryData.category_id = parseInt(createCategoryData.category_id);
-
-            // console.log(createCategoryData);
 
             let result = await CustomHttp.request(config.host + '/operations', "POST", createCategoryData);
             console.log(result);

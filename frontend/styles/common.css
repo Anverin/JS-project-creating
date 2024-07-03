@@ -189,6 +189,10 @@ body {
 }
 
 @media screen and (max-width: 430px) {
+    .charts img {
+        width: 300px;
+    }
+
     .category-input {
         max-width: 300px;
     }

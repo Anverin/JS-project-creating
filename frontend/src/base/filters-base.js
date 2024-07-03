@@ -28,8 +28,6 @@ export class FiltersBase {
 
         new AirDatepicker('#date-from', {
             buttons: ['today', 'clear'],
-            // range: true,
-            // multipleDatesSeparator: ' по ',
             onSelect({date, formattedDate, datepicker}
             ) {
                 that.calendarDates.dateFrom = date;

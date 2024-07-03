@@ -9,8 +9,10 @@ export class Main extends FiltersBase {
     }
 
     initToday() {
-        this.intervals.today.classList.add('active');
-        this.getOperations('today').then(operations => this.charts(operations));
+        if (this.accessToken) {
+            this.intervals.today.classList.add('active');
+            this.getOperations('today').then(operations => this.charts(operations));
+        }
     }
 
     getCalendarDates(dates) {
@@ -40,7 +42,6 @@ export class Main extends FiltersBase {
             }
         }
     }
-
 
 // (вызывается в filters-base.js)
     charts(operations) {

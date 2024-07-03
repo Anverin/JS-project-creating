@@ -18,8 +18,10 @@ export class IncomeAndExpense extends FiltersBase {
     }
 
     initToday() {
-        this.intervals.today.classList.add('active');
-        this.getOperations('today').then(operations => this.showBudgetItems(operations));
+        if (this.intervals.today) {
+            this.intervals.today.classList.add('active');
+            this.getOperations('today').then(operations => this.showBudgetItems(operations));
+        }
     }
 
     getCalendarDates(dates) {
@@ -161,8 +163,8 @@ export class IncomeAndExpense extends FiltersBase {
                 location.href = '#/income-and-expense-create?income';
             }
         }
-
     }
+
     transferToCreateExpense() {
         if (this.accessToken) {
             this.createExpenseBtn.onclick = function () {
