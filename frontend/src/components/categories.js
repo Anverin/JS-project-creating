@@ -9,9 +9,6 @@ export class Categories {
         // переменная для хранения родительского дива с категориями
         this.cardsElement = null;
 
-        // кнопка подтверждения удаления в поп-апе
-        // this.confirmDeleteCategoryBtnElement = null;
-
         // для универсальности кода для доходов и расходов
         this.typeCategories = null;
         this.page = null;
@@ -22,10 +19,7 @@ export class Categories {
         }
         this.page = '/categories/' + this.typeCategories + '/';
 
-
         this.accessToken = localStorage.getItem(Auth.accessTokenKey);
-
-        // const that = this;
 
         this.init().then();
     }
@@ -105,8 +99,6 @@ export class Categories {
             }
 
             const that = this;
-
-            // console.log(categoryId);
 
             const confirmDeleteCategoryBtn = document.getElementById('confirm-delete-category-btn');
 

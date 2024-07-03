@@ -43,7 +43,6 @@ export class Login extends LoginBase {
                 that.processForm();
             }
         }
-
     }
 
     validateField(field, element) {

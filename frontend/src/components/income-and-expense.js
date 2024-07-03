@@ -161,8 +161,8 @@ export class IncomeAndExpense extends FiltersBase {
                 location.href = '#/income-and-expense-create?income';
             }
         }
-
     }
+
     transferToCreateExpense() {
         if (this.accessToken) {
             this.createExpenseBtn.onclick = function () {

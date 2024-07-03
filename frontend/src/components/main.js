@@ -41,7 +41,6 @@ export class Main extends FiltersBase {
         }
     }
 
-
 // (вызывается в filters-base.js)
     charts(operations) {
         // очищать canvas, чтобы можно было заново отрисовать диаграмму при смене периода

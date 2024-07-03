@@ -69,9 +69,6 @@ export class EditIncomeAndExpense {
     // предварительное размещение данных об операции в поля формы
     async getBudgetItem(id) {
         const result = await CustomHttp.request(config.host + '/operations/' + id, "GET");
-        console.log(result);
-
-        // const that = this;
 
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
@@ -143,11 +140,7 @@ export class EditIncomeAndExpense {
                 }
             }, {})
 
-            // console.log(newCategoryData);
-
             newCategoryData.category_id = parseInt(newCategoryData.category_id);
-
-            // console.log(newCategoryData);
 
             let result = await CustomHttp.request(config.host + '/operations/' + this.categoryId, "PUT", newCategoryData);
             console.log(result);
